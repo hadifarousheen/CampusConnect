@@ -1,0 +1,19 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "description": "Platform for students from different campuses to connect",
+  "main": "index.js",
+  "scripts": {
+    "dev":"nodemon src/app.js",
+    "start": "node src/app.js"
+  },
+  "keywords": [
+    "NodeJs",
+    "MongoDB"
+  ],
+  "author": "Hadifa Rousheen",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^5.1.0"
+  }
+}
