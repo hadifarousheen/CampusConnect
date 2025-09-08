@@ -2,20 +2,28 @@ const express=require("express");
 
 const app=express();
 
-// app.use((req,res)=>{
-//     res.send("Hello Server");
+
+// app.use("/user",(req,res)=>{
+//     res.send("Hahahahaha")
 // })
 
-// app.use("/",(req,res)=>{
-//     res.send("Home Page");
-// })
+app.get("/user/:userID/:name",(req,res)=>{
+    // console.log(req.query);
+    console.log(req.params);
+res.send({firstname:"Hadifa",lastname:"Rousheen"});
+})
 
-app.use("/test",(req,res)=>{
-    res.send("Testing...");
+app.post("/user",(req,res)=>{
+    res.send("Data Saved to Database")
 })
-app.use("/",(req,res)=>{
-    res.send("Home Page");
+
+app.delete("/user",(req,res)=>{
+    res.send("Data Deleted")
 })
+
+// app.use("/user",(req,res)=>{
+//     res.send("Hahahahaha")
+// })
 
 app.listen(3000,()=>{
     console.log("Server is listening on port 3000!");
