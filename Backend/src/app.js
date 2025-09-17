@@ -1,30 +1,34 @@
 const express=require("express");
-
 const app=express();
+const connectDB=require("./config/database")
+const cookieParser=require("cookie-parser");
+const jwt=require("jsonwebtoken");
+const authRouter=require("./routes/auth");
+const profileRouter = require("./routes/profile");
+const requestRouter = require("./routes/requests");
+const userRouter = require("./routes/user");
+const cors=require('cors');
+
+app.use(cors({
+    origin:"http://localhost:5173",
+    credentials:true
+}))
+app.use(express.json());
+app.use(cookieParser());
+
+app.use("/",authRouter);
+app.use("/",profileRouter);
+app.use("/",requestRouter);
+app.use("/",userRouter);
 
 
-// app.use("/user",(req,res)=>{
-//     res.send("Hahahahaha")
-// })
 
-app.get("/user/:userID/:name",(req,res)=>{
-    // console.log(req.query);
-    console.log(req.params);
-res.send({firstname:"Hadifa",lastname:"Rousheen"});
-})
-
-app.post("/user",(req,res)=>{
-    res.send("Data Saved to Database")
-})
-
-app.delete("/user",(req,res)=>{
-    res.send("Data Deleted")
-})
-
-// app.use("/user",(req,res)=>{
-//     res.send("Hahahahaha")
-// })
-
-app.listen(3000,()=>{
+connectDB().then(()=>{
+    console.log("Database Connected");
+    app.listen(3000,()=>{
     console.log("Server is listening on port 3000!");
 });
+}).catch(err=>{
+    console.log("cannot connect to database");
+})
+
