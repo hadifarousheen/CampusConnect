@@ -10,17 +10,17 @@ const Profile = () => {
   const [firstName, setFirstName] = useState(user.firstName);
   const [lastName, setLastName] = useState(user.lastName);
   const [gender, setGender] = useState(user.gender);
-  const [age, setAge] = useState("");
-  const [college, setCollege] = useState("");
-  const [year, setYear] = useState("");
-  const [about, setAbout] = useState("");
-  const [branch, setBranch] = useState("");
-  const [skills, setSkills] = useState("");
-  const[photoUrl,setPhotoUrl]=useState("");
+  const [age, setAge] = useState(user.age || "");
+  const [college, setCollege] = useState(user.college || "");
+  const [year, setYear] = useState(user.year || "");
+  const [about, setAbout] = useState(user.about || "");
+  const [branch, setBranch] = useState(user.branch || "");
+  const [skills, setSkills] = useState(user.skills || "");
+  const[photoUrl,setPhotoUrl]=useState(user.photoUrl || "");
   const dispatch=useDispatch();
   const handleSaveProfile=async()=>{
 try{
-  const user=await axios.patch("http://localhost:3000/profile/edit",{firstName,lastName,gender,age,college,year,about,branch,skills},{withCredentials:true});
+  const user=await axios.patch("http://localhost:3000/profile/edit",{firstName,lastName,gender,age,college,year,about,branch,skills,photoUrl},{withCredentials:true});
   console.log(user)
   dispatch(addUser(user.data));
 }catch(err){

@@ -12,10 +12,11 @@ const Requests=()=>{
      dispatch(addRequest(res.data));
     }
 
-    const handleRequestReview=async(status,requestId)=>{
+    const handleRequestReview=async(status,_id)=>{
 
-  const res=await axios.post("http://localhost:3000/request/review/"+status+"/"+requestId,{},{withCredentials:true});
-  dispatch(removeRequest(requestId))
+  const res=await axios.post("http://localhost:3000/request/review/"+status+"/"+_id,{},{withCredentials:true});
+  console.log(res)
+  dispatch(removeRequest(_id))
     }
     
     
@@ -23,15 +24,18 @@ const Requests=()=>{
      fetchRequests();
     },[])
     return(
-        <div>
-            <h1>Pending Requests</h1>
+        <div className="mx-auto w-1/2">
+            <h1 className="text-3xl  mt-4">Pending Requests</h1>
    {
     requests?.map((request)=>{
-     return( <div>
+     return( <div className="border flex justify-between">
+        <div>
             <h1>{request?.fromUserId?.firstName}</h1>
+            <h2>{request?.fromUserId?.college}</h2>
+            </div>
             <div>
-                <button onClick={()=>handleRequestReview("accepted",request.fromUserId._id)}>Accept</button>
-                <button onClick={()=>handleRequestReview("rejected",request.fromUserId._id)}>Reject</button>
+                <button onClick={()=>handleRequestReview("accepted",request._id)}>Accept</button>
+                <button onClick={()=>handleRequestReview("rejected",request._id)}>Reject</button>
                 </div>
         </div>
      )

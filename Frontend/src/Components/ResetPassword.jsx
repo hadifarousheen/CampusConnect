@@ -1,6 +1,11 @@
 const ResetPassword=()=>{
     return(
-        <div></div>
+        <div>
+            <h1>Reset Password</h1>
+             <div>
+                
+             </div>
+        </div>
     )
 }
 

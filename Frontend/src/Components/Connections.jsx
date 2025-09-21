@@ -18,13 +18,16 @@ const Connections=()=>{
         fetchConnections();
     },[])
     return (
-        <div className="text-center">
+        <div className="mx-auto  w-1/2 mt-4">
             <h1 className="text-3xl">Friends</h1>
             <div>
             {
                 connections?.map((connection)=>
-                <div>
+                <div className="border flex justify-between">
+                    <div>
                     <h1>{connection.firstName}{connection.lastName}</h1>
+                    </div>
+                    <button>Chat</button>
                 </div>)
             }
             </div>
