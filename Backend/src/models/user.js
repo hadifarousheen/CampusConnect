@@ -55,16 +55,19 @@ const userSchema=new mongoose.Schema({
     },
     about:{
         type:String,
-        minLength:20,
         maxLength:150
     },
     photoUrl:{
         type:String,
-        validate(value){
-            if(!isURL(value)){
-                throw new Error("Photo Url is not valid")
-            }
-        }
+        // validate(value){
+        //     if(!isURL(value)){
+        //         throw new Error("Photo Url is not valid")
+        //     }
+        // }
+        default:"https://thefinancemd.com/wp-content/uploads/2015/08/facebook-default-no-profile-pic.jpg"
+    },
+    age:{
+        type:Number
     }
 
 },{timestamps:true})
