@@ -59,11 +59,6 @@ const userSchema=new mongoose.Schema({
     },
     photoUrl:{
         type:String,
-        // validate(value){
-        //     if(!isURL(value)){
-        //         throw new Error("Photo Url is not valid")
-        //     }
-        // }
         default:"https://thefinancemd.com/wp-content/uploads/2015/08/facebook-default-no-profile-pic.jpg"
     },
     age:{
@@ -74,7 +69,7 @@ const userSchema=new mongoose.Schema({
 
 userSchema.methods.getJWT=async function(){
     const user=this;
-    const token=await jwt.sign({_id:user.id},"CAMPUS@CONNECT$987")
+    const token=await jwt.sign({_id:user.id},process.env.TOKEN_SECRET_KEY)
     return token;
 }
 
