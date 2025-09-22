@@ -15,7 +15,7 @@ const Profile = () => {
   const [year, setYear] = useState(user.year || "");
   const [about, setAbout] = useState(user.about || "");
   const [branch, setBranch] = useState(user.branch || "");
-  const [skills, setSkills] = useState(user.skills || "");
+  const [skills, setSkills] = useState(user.skills || []);
   const[photoUrl,setPhotoUrl]=useState(user.photoUrl || "");
   const[showToast,setShowToast]=useState(false);
   const dispatch=useDispatch();
@@ -27,22 +27,24 @@ try{
   setShowToast(true)
   setTimeout(()=>{
    setShowToast(false)
-  },5000)
+  },3000)
 }catch(err){
   console.log(err.message)
 }
   }  
   return (
     <>
-   {showToast && <div className="border w-fit bg-amber-300 mx-auto my-2 p-1 rounded-lg ">
+   {showToast && <div className="w-fit bg-amber-600 text-white mx-auto my-2 p-1 px-2 rounded-lg absolute top-2 left-1/2 -translate-x-1/2 ">
       <h1 className="text-center">Profile updated Successfully</h1>
     </div>
     }
+    <div className="text-amber-950 h-[calc(100vh-3.5rem)] relative   "  style={{ backgroundImage: "url('https://i.pinimg.com/1200x/4e/2e/8d/4e2e8d018198e3a41a4ae9323e07a7dd.jpg')" }}>
+    <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-1/2 ">
     <h1 className="text-3xl font-bold text-center mt-4">Edit Profile</h1>
-    <div className=" w-2/3 md:w-1/2  md:flex m-auto mt-5 border  ">
-      <div className="border border-r-0 w-full p-2">
+    <div className="    md:flex m-auto mt-5  bg-transparent border border-amber-400 rounded-lg shadow-2xl shadow-amber-950 ">
+      <div className="  w-full p-2">
       <div className="my-2 ">
-        <label htmlFor="firstName">First Name</label>
+        <label htmlFor="firstName" className="font-bold text-xl">First Name</label>
         <input
           id="firstName"
           type="text"
@@ -54,7 +56,7 @@ try{
         />
       </div>
       <div className="my-2">
-        <label htmlFor="lastName">Last Name</label>
+        <label htmlFor="lastName" className="font-bold text-xl">Last Name</label>
         <input
           id="lastName"
           type="text"
@@ -66,10 +68,10 @@ try{
         />
       </div>
       <div className="my-2">
-        <label htmlFor="gender">Gender</label>
+        <label htmlFor="gender" className="font-bold text-xl">Gender</label>
         <select
           id="gender"
-          className="border block mt-2 px-2 py-1 w-full"
+          className="border block mt-2 px-2 py-1 w-full font-bold text-xl"
           value={gender}
           onChange={(e) => {
             setGender(e.target.value);
@@ -81,7 +83,7 @@ try{
         </select>
       </div>
       <div className="my-2">
-        <label htmlFor="age">Age</label>
+        <label htmlFor="age" className="font-bold text-xl">Age</label>
         <input
           id="age"
           type="Number"
@@ -93,15 +95,15 @@ try{
         />
       </div>
        <div className="my-2">
-        <label htmlFor="about">About</label>
-        <textarea  value={about} className="border block mt-2 px-2 py-1 w-full" onChange={(e)=>{
+        <label htmlFor="about" className="font-bold text-xl">About</label>
+        <textarea rows={5} cols={40} value={about} className="border block mt-2 px-2 py-1 box-border  " onChange={(e)=>{
           setAbout(e.target.value)
         }}></textarea>
       </div>
       </div>
-      <div className="border border-l-0 w-full p-2">
+      <div className=" w-full p-2">
       <div className="my-2">
-        <label htmlFor="college">College</label>
+        <label htmlFor="college" className="font-bold text-xl">College</label>
         <input
           id="college"
           type="text"
@@ -113,7 +115,7 @@ try{
         />
       </div>
       <div className="my-2">
-        <label htmlFor="branch">Branch</label>
+        <label htmlFor="branch" className="font-bold text-xl">Branch</label>
         <input
           id="branch"
           type="text"
@@ -125,7 +127,7 @@ try{
         />
       </div>
       <div className="my-2">
-        <label htmlFor="year">Year</label>
+        <label htmlFor="year" className="font-bold text-xl">Year</label>
         <input
           id="year"
           type="Number"
@@ -138,7 +140,7 @@ try{
       </div>
      
       <div className="my-2">
-        <label htmlFor="skills">Skills</label>
+        <label htmlFor="skills" className="font-bold text-xl">Skills</label>
         <input
           id="skills"
           type="text"
@@ -151,7 +153,7 @@ try{
      
       </div>
        <div className="my-2">
-        <label htmlFor="photo">Profile Photo</label>
+        <label htmlFor="photo" className="font-bold text-xl">Profile Photo</label>
         {/* <input
           id="photo"
           type="file"
@@ -179,11 +181,12 @@ try{
         
      
       </div>
-      <button className="border w-full my-1" onClick={()=>handleSaveProfile()}>Save Profile</button>
-   <Link to="/body/viewProfile">  <button className="border w-full my-1">View Profile</button></Link> 
+      <button className="border w-full my-1 bg-amber-500 text-white font-bold rounded-lg" onClick={()=>handleSaveProfile()}>Save Profile</button>
+   <Link to="/body/viewProfile">  <button className="border w-full my-1 bg-amber-700 text-white font-bold rounded-lg">View Profile</button></Link> 
       </div>
      </div>
-    
+     </div>
+    </div>
     </>
   );
 };

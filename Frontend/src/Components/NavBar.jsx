@@ -18,14 +18,14 @@ const NavBar = () => {
     }
   };
   return (
-    <div className="flex justify-between bg-amber-600 opacity-90 p-1">
+    <div className="flex justify-between  opacity-90 p-1 shadow-2xl shadow-amber-950" style={{ backgroundImage: "url('https://i.pinimg.com/1200x/4e/2e/8d/4e2e8d018198e3a41a4ae9323e07a7dd.jpg')" }}>
         <div className="flex items-center">
       <Link to="/body/feed">
         <h1 className="font-bold text-2xl mx-1 opacity-100 text-amber-950 ">CampusConnect</h1>
       </Link>
       </div>
       <div className="flex my-auto">
-        <div className="my-auto text-lg">
+        <div className="hidden md:block my-auto text-lg">
           <Link to="/body/connections" className=" mx-1 bg-amber-400 rounded-lg py-1 px-2">Friends</Link>
           <Link to="/body/requests" className=" mx-1 bg-amber-400 rounded-lg py-1 px-2">Requests</Link>
           <button className="mx-1 bg-amber-400 rounded-lg py-1 px-2" onClick={handleLogout}>
