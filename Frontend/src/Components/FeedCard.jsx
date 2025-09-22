@@ -11,7 +11,7 @@ const FeedCard=({user})=>{
     }
     return(
 
-  <div className="border border-amber-300 w-2/3 md:w-1/5 p-4 rounded-lg  shadow-2xl shadow-amber-950 mx-auto absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2  bg-amber-100 opacity-80">
+  <div className="border border-amber-300 w-2/3 md:w-1/5 p-4 rounded-lg  shadow-2xl shadow-amber-950 mx-auto absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 -z-0 bg-amber-100 opacity-80">
     <img className="h-60 w-60 rounded-lg" src={photoUrl} />
     <div className="my-2">
     <h1 className="my-1 font-bold text-2xl">{firstName + " " + lastName}</h1>

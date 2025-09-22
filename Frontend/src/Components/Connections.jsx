@@ -19,9 +19,9 @@ const Connections=()=>{
     },[])
     return (
         <div className="flex  justify-center h-[calc(100vh-4rem)]   overflow-hidden"  style={{ backgroundImage: "url('https://i.pinimg.com/1200x/4e/2e/8d/4e2e8d018198e3a41a4ae9323e07a7dd.jpg')" }}>
-        <div className="mx-auto w-full  md:w-1/2 mt-4 " >
+        <div className="mx-auto w-full  md:w-1/2 mt-4 p-1" >
             <h1 className="text-3xl font-bold text-amber-950 shadow-2xl ">Friends</h1>
-            <div className="my-2 "> 
+            <div className="my-2  "> 
             {
                 connections?.map((connection)=>
                 <div className=" bg-amber-100 flex justify-between my-2 p-1 px-2 py-2 rounded-lg shadow-2xl shadow-amber-950">

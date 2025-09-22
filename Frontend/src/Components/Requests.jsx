@@ -25,7 +25,7 @@ const Requests=()=>{
     },[])
     return(
         <div className="flex  justify-center h-[calc(100vh-4rem)]   overflow-hidden"  style={{ backgroundImage: "url('https://i.pinimg.com/1200x/4e/2e/8d/4e2e8d018198e3a41a4ae9323e07a7dd.jpg')" }}>
-        <div className="mx-auto w-full md:w-1/2">
+        <div className="mx-auto w-full md:w-1/2 p-1">
             <h1 className="text-3xl  font-bold my-4 text-amber-950 shadow-2xl ">Pending Requests</h1>
             <div className="my-2 ">
    {
