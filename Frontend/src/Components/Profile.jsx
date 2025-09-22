@@ -17,21 +17,30 @@ const Profile = () => {
   const [branch, setBranch] = useState(user.branch || "");
   const [skills, setSkills] = useState(user.skills || "");
   const[photoUrl,setPhotoUrl]=useState(user.photoUrl || "");
+  const[showToast,setShowToast]=useState(false);
   const dispatch=useDispatch();
   const handleSaveProfile=async()=>{
 try{
   const user=await axios.patch("http://localhost:3000/profile/edit",{firstName,lastName,gender,age,college,year,about,branch,skills,photoUrl},{withCredentials:true});
   console.log(user)
   dispatch(addUser(user.data));
+  setShowToast(true)
+  setTimeout(()=>{
+   setShowToast(false)
+  },5000)
 }catch(err){
   console.log(err.message)
 }
   }  
   return (
     <>
+   {showToast && <div className="border w-fit bg-amber-300 mx-auto my-2 p-1 rounded-lg ">
+      <h1 className="text-center">Profile updated Successfully</h1>
+    </div>
+    }
     <h1 className="text-3xl font-bold text-center mt-4">Edit Profile</h1>
-    <div className="w-1/2  flex m-auto mt-5 border ">
-      <div className="border w-full p-2">
+    <div className=" w-2/3 md:w-1/2  md:flex m-auto mt-5 border  ">
+      <div className="border border-r-0 w-full p-2">
       <div className="my-2 ">
         <label htmlFor="firstName">First Name</label>
         <input
@@ -85,12 +94,12 @@ try{
       </div>
        <div className="my-2">
         <label htmlFor="about">About</label>
-        <textarea rows={5} cols={40} value={about} className="border block mt-2 px-2 py-1" onChange={(e)=>{
+        <textarea  value={about} className="border block mt-2 px-2 py-1 w-full" onChange={(e)=>{
           setAbout(e.target.value)
         }}></textarea>
       </div>
       </div>
-      <div className="border w-full p-2">
+      <div className="border border-l-0 w-full p-2">
       <div className="my-2">
         <label htmlFor="college">College</label>
         <input

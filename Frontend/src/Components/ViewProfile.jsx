@@ -6,7 +6,7 @@ const ViewProfile=()=>{
     const user=useSelector(store=>store.user);
     console.log(user)
     return(
-        <div>
+        <div className="w-1/4 mx-auto">
             <UserCard user={user}/>
         </div>
     )

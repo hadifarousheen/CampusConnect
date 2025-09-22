@@ -19,7 +19,7 @@ const Feed = () => {
   }, []);
 
   return (
-    <div className="flex items-center justify-center h-[calc(100vh-4rem)]   overflow-hidden">
+    <div className="flex items-center justify-center h-[calc(100vh-4rem)]   overflow-hidden opacity-90"   style={{ backgroundImage: "url('https://i.pinimg.com/1200x/4e/2e/8d/4e2e8d018198e3a41a4ae9323e07a7dd.jpg')" }}>
       {feed.length > 0 ? <FeedCard user={feed[0]} /> : <h1 className="text-2xl">No Users Found 🔎</h1>}
     </div>
   );

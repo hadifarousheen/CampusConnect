@@ -24,23 +24,25 @@ const Requests=()=>{
      fetchRequests();
     },[])
     return(
-        <div className="mx-auto w-1/2">
-            <h1 className="text-3xl  mt-4">Pending Requests</h1>
+        <div className="mx-auto w-full md:w-1/2">
+            <h1 className="text-3xl  mt-4 font-bold my-2">Pending Requests</h1>
+            <div className="my-2">
    {
     requests?.map((request)=>{
-     return( <div className="border flex justify-between">
+     return( <div className="border flex justify-between my-2 p-1 rounded-lg">
         <div>
             <h1>{request?.fromUserId?.firstName}</h1>
             <h2>{request?.fromUserId?.college}</h2>
             </div>
-            <div>
-                <button onClick={()=>handleRequestReview("accepted",request._id)}>Accept</button>
-                <button onClick={()=>handleRequestReview("rejected",request._id)}>Reject</button>
+            <div className="my-auto">
+                <button className="border mx-1 p-1 rounded-lg" onClick={()=>handleRequestReview("accepted",request._id)}>Accept</button>
+                <button className="border mx-1 p-1 rounded-lg" onClick={()=>handleRequestReview("rejected",request._id)}>Reject</button>
                 </div>
         </div>
      )
     })
    }
+   </div>
         </div>
     )
 }

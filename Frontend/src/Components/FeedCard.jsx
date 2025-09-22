@@ -11,15 +11,17 @@ const FeedCard=({user})=>{
     }
     return(
 
-  <div className="border w-1/5 p-4 rounded-lg">
+  <div className="border w-2/3 md:w-1/5 p-4 rounded-lg bg-transparent  shadow-xl/30 shadow-amber-800">
     <img className="h-60 w-60" src={photoUrl} />
     <div className="my-2">
-    <h1>{firstName + " " + lastName}</h1>
-    <p>{age} {gender}</p>
+    <h1 className="my-1 font-bold text-2xl">{firstName + " " + lastName}</h1>
+    <div className="text-xl">
+    <p>{ age},{ gender}</p>
     <p>{about}</p>
     <p>{college}</p>
-    <p>{year} {branch}</p>
-    <p>{skills}</p>
+    <p>{year} {branch.toUpperCase()}</p>
+    <p>{skills.map((skill)=><span className="border ">{skill}</span>)}</p>
+    </div>
     </div>
     <div className="flex gap-1">
         <button className="border w-1/2" onClick={()=>handleClick('interested',_id)}>Interested</button>
