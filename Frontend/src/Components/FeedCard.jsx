@@ -19,8 +19,8 @@ const FeedCard=({user})=>{
     <p>{ age},{ gender}</p>
     <p>{about}</p>
     <p>{college}</p>
-    <p>{year} {branch.toUpperCase()}</p>
-    {skills.map((skill)=><span className=" ">{skill}</span>)}
+    <p>{year} {branch?.toUpperCase()}</p>
+    {skills?.map((skill)=><span className=" ">{skill}</span>)}
     </div>
     </div>
     <div className="flex gap-1 text-white font-bold py-2">

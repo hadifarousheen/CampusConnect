@@ -7,15 +7,18 @@ import {addUser} from "../utils/userSlice";
 const Login = () => {
     const[emailId,setEmail]=useState("tom@gmail.com");
     const[password,setPassword]=useState("Tom@123");
+    const[error,setError]=useState("");
     const dispatch=useDispatch();
     const navigate=useNavigate();
     const handleLogin=async()=>{
     try{
         const res=await axios.post("http://localhost:3000/login",{emailId,password},{withCredentials:true});
+        setError("")
         dispatch(addUser(res.data));
         navigate("/body");
     }catch(err){
-      console.log("axios error"+err.message);
+      console.log(err?.response?.data?.message);
+      setError(err?.response?.data?.message)
     }
     }
 
@@ -52,6 +55,7 @@ const Login = () => {
           <Link to="/signup" className="text-sm text-amber-400">New User?</Link>
           <Link to="/resetPassword" className="text-sm text-amber-400">Forgot Password?</Link>
           </div>
+          <p className="text-red-600 text-xl">{error}</p>
           <button onClick={handleLogin} className="border w-full my-4 py-2 bg-amber-300  text-black font-bold rounded">
             Login
           </button>

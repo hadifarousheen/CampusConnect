@@ -10,16 +10,19 @@ const SignUp = () => {
   const [gender, setGender] = useState("");
   const [emailId, setEmailId] = useState("");
   const [password, setPassword] = useState("");
+  const[error,setError]=useState("");
   const dispatch=useDispatch();
   const navigate=useNavigate();
   const handleSignUp = async() => {
  try{
  const res=await axios.post("http://localhost:3000/signup",{firstName,lastName,emailId,password,gender},{withCredentials:true});
- console.log(res.data)
+ setError("");
  dispatch(addUser(res.data))
  navigate("/body/profile")
  }catch(err){
-    console.log("problem in frontend"+err.message);
+    console.log(err?.response?.data?.message);
+    //  console.log(err)
+    setError(err?.response?.data?.message)
  }
   };
   return (
@@ -36,6 +39,7 @@ const SignUp = () => {
             <input 
                id="firstName"
                type="text"
+               required
                className="border block mt-2 px-2 py-1 w-full"
                value={firstName}
                onChange={(e) => {
@@ -48,6 +52,7 @@ const SignUp = () => {
              <input
                id="lastName"
                type="text"
+               required
                className="border block mt-2 px-2 py-1 w-full"
               value={lastName}
               onChange={(e) => {
@@ -57,7 +62,7 @@ const SignUp = () => {
           </div>
           <div className="my-2">
             <label htmlFor="gender">Gender</label>
-            <select id="gender" className="block w-full mt-2 px-2 py-1 border bg-black " value={gender} onChange={(e)=>{setGender(e.target.value)}}>
+            <select id="gender" required className="block w-full mt-2 px-2 py-1 border bg-black " value={gender} onChange={(e)=>{setGender(e.target.value)}}>
                 <option value="" disabled hidden>Select Gender</option>
                 <option value="Male">Male</option>
                  <option value="Female">Female</option>
@@ -69,6 +74,7 @@ const SignUp = () => {
             <input
               id="email"
               type="email"
+              required
               className="border block mt-2 px-2 py-1 w-full"
               value={emailId}
               onChange={(e) => {
@@ -80,6 +86,7 @@ const SignUp = () => {
             <label htmlFor="password">Password</label>
             <input
               id="password"
+              required
               type="text"
               className="border block mt-2 px-2 py-1 w-full"
               value={password}
@@ -88,6 +95,7 @@ const SignUp = () => {
               }}
             />
           </div>
+          <p className="text-red-600 text-xl">{error}</p>
           <Link to="/" className="text-lg">Already Registered?</Link>
           <button
             onClick={handleSignUp}
