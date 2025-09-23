@@ -14,23 +14,21 @@ const userSchema=new mongoose.Schema({
         reauired:true,
         trim:true
     },
-    emailId:{
-        type:String,
-        unique:true,
-        validate(value){
-            if(!validator.isEmail(value)){
-                throw new Error("Invalid email")
-            }
-        }
+   emailId: {
+  type: String,
+  unique: true,
+  required: [true, "Email is required"],
+  validate: {
+    validator: function (value) {
+      return validator.isEmail(value); 
     },
+    message: "Invalid Email"
+  }
+},
    password:{
         type:String,
-        required:true,
-        validate(value){
-            if(!validator.isStrongPassword(value)){
-                throw new Error("Password is Not Strong")
-            }
-        }
+        required:[true,"Password is required"],
+       
     },
     gender:{
         type:String,
