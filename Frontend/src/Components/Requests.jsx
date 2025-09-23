@@ -30,14 +30,14 @@ const Requests=()=>{
             <div className="my-2 ">
    {
     requests?.map((request)=>{
-     return( <div className=" flex justify-between my-2 p-1 px-2 rounded-lg bg-amber-100 shadow-2xl shadow-amber-950">
+     return( <div className=" flex justify-between my-2 p-1 px-2 rounded-lg bg-amber-100 shadow-2xl shadow-amber-950 py-2">
         <div>
             <h1 className="text-xl font-bold">{request?.fromUserId?.firstName} {request?.fromUserId?.lastName}</h1>
             <h2 className="text-lg">{request?.fromUserId?.college}</h2>
             </div>
             <div className="my-auto text-white font-bold">
-                <button className=" mx-1 p-1 px-2 rounded-lg bg-amber-500" onClick={()=>handleRequestReview("accepted",request._id)}>Accept</button>
-                <button className=" mx-1 p-1 px-2 rounded-lg bg-amber-800" onClick={()=>handleRequestReview("rejected",request._id)}>Reject</button>
+                <button className="hover:scale-95 mx-1 p-1 px-2 rounded-lg bg-amber-500" onClick={()=>handleRequestReview("accepted",request._id)}>Accept</button>
+                <button className="hover:scale-95 mx-1 p-1 px-2 rounded-lg bg-amber-800" onClick={()=>handleRequestReview("rejected",request._id)}>Reject</button>
                 </div>
         </div>
      )

@@ -8,7 +8,7 @@ const feedSlice=createSlice({
             return action.payload
         },
         removeFromFeed:(state,action)=>{
-            const newFeed=state.filter(user=>user._id.toString()!=action.payload.toString());
+            const newFeed=state.filter(user=>user._id!=action.payload);
             return newFeed;
         }
     }

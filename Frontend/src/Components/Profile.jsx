@@ -1,24 +1,25 @@
-import { useState } from "react";
-import UserCard from "./UserCard";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 import { addUser } from "../utils/userSlice";
 import { Link } from "react-router-dom";
 
 const Profile = () => {
-  const user = useSelector((store) => store.user);
-  const [firstName, setFirstName] = useState(user.firstName);
-  const [lastName, setLastName] = useState(user.lastName);
-  const [gender, setGender] = useState(user.gender);
-  const [age, setAge] = useState(user.age || "");
-  const [college, setCollege] = useState(user.college || "");
-  const [year, setYear] = useState(user.year || "");
-  const [about, setAbout] = useState(user.about || "");
-  const [branch, setBranch] = useState(user.branch || "");
-  const [skills, setSkills] = useState(user.skills || []);
-  const[photoUrl,setPhotoUrl]=useState(user.photoUrl || "");
+  const user=useSelector(store=>store.user)
+  const [firstName, setFirstName] = useState(user?.firstName);
+  const [lastName, setLastName] = useState(user?.lastName);
+  const [gender, setGender] = useState(user?.gender);
+  const [age, setAge] = useState(user?.age || "");
+  const [college, setCollege] = useState(user?.college||"");
+  const [year, setYear] = useState(user?.year||"");
+  const [about, setAbout] = useState(user?.about||"");
+  const [branch, setBranch] = useState(user?.branch||"");
+  const [skills, setSkills] = useState(user?.skills||[]);
+  const[photoUrl,setPhotoUrl]=useState(user?.photoUrl||"");
   const[showToast,setShowToast]=useState(false);
   const dispatch=useDispatch();
+
+
   const handleSaveProfile=async()=>{
 try{
   const user=await axios.patch("http://localhost:3000/profile/edit",{firstName,lastName,gender,age,college,year,about,branch,skills,photoUrl},{withCredentials:true});
@@ -32,6 +33,10 @@ try{
   console.log(err.message)
 }
   }  
+ 
+    
+
+    
   return (
     <>
    {showToast && <div className="w-1/2 md:w-fit bg-amber-600 text-white mx-auto my-2 p-1 px-2 rounded-lg absolute top-2 left-1/2 -translate-x-1/2 ">
@@ -147,7 +152,7 @@ try{
           className="border block mt-2 px-2 py-1 w-full"
           value={skills}
           onChange={(e) => {
-            setSkills(e.target.value);
+            setSkills(e.target.value.split(',').map(s => s.trim()))
           }}
         />
      
@@ -181,8 +186,8 @@ try{
         
      
       </div>
-      <button className="border w-full my-1 bg-amber-500 text-white font-bold rounded-lg" onClick={()=>handleSaveProfile()}>Save Profile</button>
-   <Link to="/body/viewProfile">  <button className="border w-full my-1 bg-amber-700 text-white font-bold rounded-lg">View Profile</button></Link> 
+      <button className="border w-full my-1 py-2 bg-amber-500 text-white font-bold rounded-lg" onClick={()=>handleSaveProfile()}>Save Profile</button>
+   <Link to="/body/viewProfile">  <button className="border w-full my-1 bg-amber-700 text-white font-bold rounded-lg py-2">View Profile</button></Link> 
       </div>
      </div>
      </div>
