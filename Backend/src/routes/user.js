@@ -10,7 +10,7 @@ userRouter.get("/user/request/received", userAuth, async (req, res) => {
     const connectionRequest = await ConnectionRequest.find({
       toUserId: loggedInUser._id,
       status: "interested",
-    }).populate("fromUserId", "firstName lastName college");
+    }).populate("fromUserId", "firstName lastName college photoUrl");
     res.send(connectionRequest);
   } catch (err) {
     res.status(400).send(err.message);
@@ -32,8 +32,8 @@ userRouter.get("/user/connections", userAuth, async (req, res) => {
         },
       ],
     })
-      .populate("fromUserId", "firstName lastName")
-      .populate("toUserId", "firstName lastName");
+      .populate("fromUserId", "firstName lastName photoUrl")
+      .populate("toUserId", "firstName lastName photoUrl");
 
     const data = connectionRequest.map((row) => {
       if (row.fromUserId._id.toString() == loggedInUser._id.toString()) {
