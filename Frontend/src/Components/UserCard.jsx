@@ -1,46 +1,57 @@
-const UserCard = ({ user }) => {
-  const {
-    firstName,
-    lastName,
-    age,
-    gender,
-    about,
-    skills,
-    college,
-    year,
-    branch,
-    photoUrl,
-  } = user;
+import axios from "axios";
+import { addUser } from "../utils/userSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
+
+const UserCard = () => {
+  const dispatch=useDispatch();
+  const user=useSelector(store=>store.user)
+  
+    const fetchUser=async()=>{
+        try{
+             const user=await axios.get("http://localhost:3000/profile/view",{withCredentials:true});
+             console.log(user?.data)
+             dispatch(addUser(user?.data));
+              
+            
+        }catch(err){
+         console.log(err.message);
+        }
+    }
+    useEffect(()=>{
+        fetchUser();
+    },[]);
+    useEffect(()=>{},[user])
   return (
     <div className=" mt-6    p-2 rounded-lg shadow-2xl shadow-amber-950  bg-amber-100 ">
-      <img className="h-60 w-60 mx-auto" src={photoUrl} />
+      <img className="h-60 w-60 mx-auto" src={user?.photoUrl} />
       <h1 className="text-2xl font-bold px-2 mt-4">
-        {firstName + " " + lastName}
+        {user?.firstName + " " + user?.lastName}
       </h1>
       <div className="my-2 text-xl">
-        {age && gender && (
+        {user?.age && user?.gender && (
           <p className="px-2">
-            {age} , {gender}
+            {user?.age} , {user?.gender}
           </p>
         )}
-      { college &&  <p className="px-2">
-          <span className="font-bold">College:</span> {college}
+      { user?.college &&  <p className="px-2">
+          <span className="font-bold">College:</span> {user?.college}
         </p>
 }
-      {year &&  <p className="px-2">
-          <span className="font-bold">Year:</span> {year}{" "}
+      {user?.year &&  <p className="px-2">
+          <span className="font-bold">Year:</span> {user?.year}{" "}
         </p>
 }
-   {branch &&   <p className="px-2">
-        <span className="font-bold">Branch:</span> {branch?.toUpperCase()}{" "}
+   {user?.branch &&   <p className="px-2">
+        <span className="font-bold">Branch:</span> {user?.branch?.toUpperCase()}{" "}
       </p>}
-     {about &&   <p className="whitespace-pre-line break-words max-h-40 overflow-y-auto px-2 py-2">
-          ❝{about}❞
+     {user?.about &&   <p className="whitespace-pre-line break-words max-h-40 overflow-y-auto px-2 py-2">
+          ❝{user?.about}❞
         </p>
 }
 
         <p className="my-2">
-          {skills?.map((skill) => (
+          {user?.skills?.map((skill) => (
             <span className=" px-2 bg-amber-600 text-white mx-1 py-0.5 rounded-lg">
               {skill.toUpperCase()}
             </span>

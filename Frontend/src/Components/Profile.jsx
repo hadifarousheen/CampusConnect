@@ -33,7 +33,36 @@ try{
   console.log(err.message)
 }
   }  
- 
+
+    const fetchUser=async()=>{
+        try{
+             const user=await axios.get("http://localhost:3000/profile/view",{withCredentials:true});
+             console.log(user?.data)
+             dispatch(addUser(user?.data));
+              
+            
+        }catch(err){
+         console.log(err.message);
+        }
+    }
+    useEffect(()=>{
+        fetchUser();
+    },[]);
+
+    useEffect(() => {
+  if (user) {
+    setFirstName(user.firstName || "");
+    setLastName(user.lastName || "");
+    setGender(user.gender || "");
+    setAge(user.age || "");
+    setCollege(user.college || "");
+    setYear(user.year || "");
+    setAbout(user.about || "");
+    setBranch(user.branch || "");
+    setSkills(user.skills || []);
+    setPhotoUrl(user.photoUrl || "");
+  }
+}, [user]);
     
 
     
