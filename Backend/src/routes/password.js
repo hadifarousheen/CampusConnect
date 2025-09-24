@@ -13,6 +13,8 @@ passwordRouter.post("/forgetpassword/verifyemail",async(req,res)=>{
     }
 
  const actualOtp= `${Math.floor(Math.random() * 9000)}`.padStart(4,0);
+ user.otp=actualOtp;
+ await user.save()
  let mailTransporter =
     nodemailer.createTransport(
         {
@@ -46,7 +48,21 @@ mailTransporter
    
 
 })
+passwordRouter.post("/forgetpassword/verifyotp",async(req,res)=>{
+    try{
+    const emailId=req.body.emailId;
+    const otp=req.body.otp;
 
+    const user=await User.findOne({emailId:emailId});
+    console.log(user)
+       if(user.otp!==otp.toString()){
+        return res.status(400).json({message:'Invalid Otp'})
+       }
+       res.send(user)
+    }catch(err){
+        console.log(err)
+    }
+})
 
 passwordRouter.post("/forgetpassword/changepassword",async(req,res)=>{
     const newPassword=req.body.password;
