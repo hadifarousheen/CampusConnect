@@ -5,26 +5,28 @@ import axios from "axios";
 import { useDispatch } from "react-redux";
 import { addUser } from "../utils/userSlice";
 import { useEffect } from "react";
-const Body=()=>{
-    const dispatch=useDispatch();
-    const fetchUser=async()=>{
-        try{
-             const user=await axios.get("http://localhost:3000/profile/view",{withCredentials:true});
-             dispatch(addUser(user.data));
-        }catch(err){
-         console.log(err.message);
-        }
+const Body = () => {
+  const dispatch = useDispatch();
+  const fetchUser = async () => {
+    try {
+      const user = await axios.get("http://localhost:3000/profile/view", {
+        withCredentials: true,
+      });
+      dispatch(addUser(user.data));
+    } catch (err) {
+      console.log(err.message);
     }
-    useEffect(()=>{
-        fetchUser();
-    },[]);
-    return(
-        <>
-        <NavBar/>
-        <Outlet/>
-        <Footer/>
-        </>
-    )
-}
+  };
+  useEffect(() => {
+    fetchUser();
+  }, []);
+  return (
+    <>
+      <NavBar />
+      <Outlet />
+      <Footer />
+    </>
+  );
+};
 
 export default Body;

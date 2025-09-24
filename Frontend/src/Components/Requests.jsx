@@ -32,7 +32,10 @@ const Requests=()=>{
     requests?.map((request)=>{
      return( <div className=" flex justify-between my-2 p-1 px-2 rounded-lg bg-amber-100 shadow-2xl shadow-amber-950 py-2">
         <div>
-            <h1 className="text-xl font-bold">{request?.fromUserId?.firstName} {request?.fromUserId?.lastName}</h1>
+            <div className="flex">
+            <img className="h-12 w-12 border ml-1 mr-2 rounded-full my-auto " src={request?.photoUrl}/>
+            <h1 className="text-xl font-bold my-auto">{request?.fromUserId?.firstName} {request?.fromUserId?.lastName}</h1>
+            </div>
             <h2 className="text-lg">{request?.fromUserId?.college}</h2>
             </div>
             <div className="my-auto text-white font-bold">
