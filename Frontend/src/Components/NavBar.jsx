@@ -32,6 +32,7 @@ const NavBar = () => {
       <div className="flex my-auto relative">
       <div className="hidden md:block my-auto text-lg">
          <Link to="/body/profile" className=" mx-1 bg-amber-400 rounded-lg py-1 px-2">Profile</Link>
+         <Link to="/body/premium" className=" mx-1 bg-amber-400 rounded-lg py-1 px-2">Premium</Link>
           <Link to="/body/connections" className=" mx-1 bg-amber-400 rounded-lg py-1 px-2">Friends</Link>
           <Link to="/body/requests" className=" mx-1 bg-amber-400 rounded-lg py-1 px-2">Requests</Link>
           <button className="mx-1 bg-amber-400 rounded-lg py-1 px-2" onClick={handleLogout}>
@@ -53,6 +54,7 @@ const NavBar = () => {
        
        { showMenu && <div className="flex flex-col order-1  md:hidden text-white absolute z-[1001] border top-12 right-0  my-auto text-lg shadow-xl shadow-amber-600 text-left">
              <Link to="/body/profile" className="w-full my-1 mx-1 bg-amber-500  py-1 px-2 block">Profile</Link>
+                    <Link to="/body/premium" className="w-full my-1 mx-1 bg-amber-500  py-1 px-2 block">Premium</Link>
           <Link to="/body/connections" className="w-full mx-1 bg-amber-500  py-1 px-2 block my-1">Friends</Link>
           <Link to="/body/requests" className=" mx-1 bg-amber-500  py-1 px-2 block w-full my-1">Requests</Link>
           <button className="text-left mx-1 bg-amber-500 w-full py-1 px-2 block my-1 " onClick={handleLogout}>

@@ -10,6 +10,7 @@ import ResetPassword from "./ResetPassword";
 import Requests from "./Requests";
 import Connections from "./Connections";
 import ViewProfile from "./ViewProfile";
+import Premium from "./Premium";
 const App = () => {
   return (
     <Provider store={appStore}>
@@ -25,6 +26,7 @@ const App = () => {
             <Route path="connections" element={<Connections />} />
             <Route path="requests" element={<Requests />} />
             <Route path="viewProfile" element={<ViewProfile/>} />
+            <Route path="premium" element={<Premium/>}/>
           </Route>
         </Routes>
       </BrowserRouter>
