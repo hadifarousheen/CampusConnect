@@ -64,6 +64,16 @@ const userSchema=new mongoose.Schema({
     },
         otp:{
             type:String
+        },
+        isPremium:{
+            type:Boolean,
+            default:false
+        },
+        memberShipType:{
+            type:String
+        },
+        memberShipValidity:{
+            type:Number
         }
     
 

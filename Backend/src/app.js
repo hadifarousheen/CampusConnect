@@ -8,7 +8,11 @@ const profileRouter = require("./routes/profile");
 const requestRouter = require("./routes/requests");
 const userRouter = require("./routes/user");
 const passwordRouter=require("./routes/password")
+const paymentRouter=require("./routes/payment")
 const cors=require('cors');
+const http=require('http');
+const initializeSocket=require("./utils/socket");
+const chatRouter=require("./routes/chat")
 
 app.use(cors({
     origin:"http://localhost:5173",
@@ -21,13 +25,15 @@ app.use("/",authRouter);
 app.use("/",profileRouter);
 app.use("/",requestRouter);
 app.use("/",userRouter);
-app.use("/",passwordRouter)
+app.use("/",passwordRouter);
+app.use("/",paymentRouter)
+app.use("/",chatRouter)
 
-
-
+const server=http.createServer(app)
+initializeSocket(server)
 connectDB().then(()=>{
     console.log("Database Connected");
-    app.listen(3000,()=>{
+    server.listen(3000,()=>{
     console.log("Server is listening on port 3000!");
 });
 }).catch(err=>{
