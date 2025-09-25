@@ -33,7 +33,7 @@ const payment=new Payment({
     notes:order.notes
 });
 
-const savedPayment=await payment.Save();
+const savedPayment=await payment.save();
 res.json({...savedPayment.toJSON()})
 }catch(err){
     console.log(err)
@@ -41,7 +41,7 @@ res.json({...savedPayment.toJSON()})
 })
 
 
-paymentRouter.post("/payment/webhook",async(req,res)=>{
+paymentRouter.post("/payment/webhook",userAuth,async(req,res)=>{
     try{
         const webhookSignature=req.headers("X-Razorpay-Signature")
         const isWebhookValid=validateWebhookSignature(JSON.stringify(req.body),webhookSignature,process.env.WEBHOOK_SECRET )
