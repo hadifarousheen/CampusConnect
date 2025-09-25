@@ -11,6 +11,7 @@ import Requests from "./Requests";
 import Connections from "./Connections";
 import ViewProfile from "./ViewProfile";
 import Premium from "./Premium";
+import Chat from "./Chat"
 const App = () => {
   return (
     <Provider store={appStore}>
@@ -27,6 +28,7 @@ const App = () => {
             <Route path="requests" element={<Requests />} />
             <Route path="viewProfile" element={<ViewProfile/>} />
             <Route path="premium" element={<Premium/>}/>
+            <Route path="chat/:targetUserId/:firstName" element={<Chat/>}/>
           </Route>
         </Routes>
       </BrowserRouter>
