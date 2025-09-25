@@ -44,7 +44,7 @@ const Connections = () => {
                   {connection.firstName} {connection.lastName}
                 </h1>
               </div>
-              <Link to={"/body/chat/"+connection._id+"/"+connection.firstName} className="text-xl  mx-1 px-2 font-bold rounded-lg bg-amber-600 text-white">
+              <Link to={"/body/chat/"+connection._id} className="text-xl  mx-1 px-2 font-bold rounded-lg bg-amber-600 text-white">
                 Chat
               </Link>
             </div>

@@ -28,7 +28,7 @@ const App = () => {
             <Route path="requests" element={<Requests />} />
             <Route path="viewProfile" element={<ViewProfile/>} />
             <Route path="premium" element={<Premium/>}/>
-            <Route path="chat/:targetUserId/:firstName" element={<Chat/>}/>
+            <Route path="chat/:targetUserId" element={<Chat/>}/>
           </Route>
         </Routes>
       </BrowserRouter>

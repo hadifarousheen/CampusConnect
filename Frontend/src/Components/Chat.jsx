@@ -1,15 +1,18 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState,useRef } from "react";
 import { useParams } from "react-router-dom";
 import { createSocketConnection } from "../utils/socket";
 import axios from "axios";
 import { useSelector } from "react-redux";
 
 const Chat = () => {
-  const { targetUserId, firstName } = useParams();
+  const { targetUserId } = useParams();
 
   const [newMessage, setNewMessage] = useState("");
   const [messages, setMessages] = useState([]);
   const user = useSelector((store) => store.user);
+  const connections=useSelector((store=>store.connections));
+  const chatUser=connections.filter(connection=>connection._id==targetUserId);
+  console.log(chatUser[0])
   const userId = user?._id;
   const fetchChatMessages = async () => {
     const chat = await axios.get("http://localhost:3000/chat/" + targetUserId, {
@@ -32,13 +35,17 @@ const Chat = () => {
   useEffect(() => {
     fetchChatMessages();
   }, []);
+  const messagesEndRef = useRef(null);
 
+
+  useEffect(() => {
+    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+  }, [messages]);
   useEffect(() => {
     if (!userId) {
       return;
     }
     const socket = createSocketConnection();
-    // As soon as the page loaded, the socket connection is made and joinChat event is emitted
     socket.emit("joinChat", {
       firstName: user.firstName,
       userId,
@@ -72,50 +79,63 @@ const Chat = () => {
     setNewMessage("");
   };
   return (
-    <div
-      className="flex items-center justify-center  h-[calc(100vh-3.5rem)] "
+   <div
+      className="flex items-center justify-center h-[calc(100vh-3.5rem)] bg-cover bg-center"
       style={{
         backgroundImage:
           "url('https://i.pinimg.com/1200x/4e/2e/8d/4e2e8d018198e3a41a4ae9323e07a7dd.jpg')",
       }}
     >
-      <div className="relative border rounded-lg h-10/12 w-4/5 p-2">
-        <h1 className="text-3xl font-bold mx-1">{firstName}</h1>
-        <div>
+      <div className="relative flex flex-col border border-amber-950 rounded-2xl h-5/6 w-4/5 shadow-2xl shadow-amber-700 bg-transparent ">
+        
+
+        <div className="flex m-1">
+        <img className="h-12 w-12 border ml-1 mr-2 rounded-full my-auto" src={chatUser[0]?.photoUrl}/>
+        <h1 className="text-3xl font-bold p-3 text-amber-950">{chatUser[0]?.firstName}</h1>
+        </div>
+
+        <div className="flex-1 overflow-y-auto space-y-3 px-3 pb-24 scrollbar-hidden">
           {messages?.map((msg, index) => {
+            const isUser = user?.firstName === msg?.firstName;
             return (
-              <div
-                key={index}
-                className={`${
-                  user?.firstName === msg?.firstName
-                    ? "ml-auto border w-fit p-1 rounded-lg"
-                    : "mr-auto border w-fit p-1 rounded-lg"
-                }`}
-              >
-                <div>
-                  {`${msg.firstName}  ${msg.lastName}`}
-                  <time className="text-xs opacity-50"> 2 hours ago</time>
+              <div key={index} className={`flex ${isUser ? "justify-end" : "justify-start"}`}>
+                <div
+                  className={`max-w-xs px-3 py-2 rounded-2xl shadow-md ${
+                    isUser
+                      ? "bg-amber-500 text-white rounded-br-none"
+                      : "bg-amber-600 text-white rounded-bl-none"
+                  }`}
+                >
+                  <div className="text-xs md:text-md font-semibold opacity-70 mb-1">
+                    {msg.firstName} {msg.lastName}
+                  </div>
+                  <div className="text-sm">{msg.text}</div>
                 </div>
-                <div>{msg.text}</div>
               </div>
             );
           })}
+      
+          <div ref={messagesEndRef} />
         </div>
-        <div className="absolute  bottom-0   ">
-          <div className="border w-full">
+
+        <div className="absolute w-full bottom-0 left-0 p-3 bg-transparent backdrop-blur-md rounded-b-2xl flex gap-2 shadow-inner">
           <input
-          className=""
+            className="flex-1 border rounded-full px-4 py-2 outline-none focus:ring-2 focus:ring-amber-400"
             type="text"
             value={newMessage}
-            onChange={(e) => {
-              setNewMessage(e.target.value);
-            }}
+            placeholder="Type a message..."
+            onChange={(e) => setNewMessage(e.target.value)}
           />
-          <button className="border w-4/12" onClick={sendMessage}>Send</button>
-          </div>
+          <button
+            className="bg-amber-500 hover:bg-amber-600 text-white px-5 py-2 rounded-full font-medium shadow-md transition"
+            onClick={sendMessage}
+          >
+            Send
+          </button>
         </div>
       </div>
     </div>
+
   );
 };
 
