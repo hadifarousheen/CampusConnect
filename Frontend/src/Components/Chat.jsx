@@ -1,4 +1,4 @@
-import { useEffect, useState,useRef } from "react";
+import { useEffect, useState, useRef } from "react";
 import { useParams } from "react-router-dom";
 import { createSocketConnection } from "../utils/socket";
 import axios from "axios";
@@ -10,16 +10,15 @@ const Chat = () => {
   const [newMessage, setNewMessage] = useState("");
   const [messages, setMessages] = useState([]);
   const user = useSelector((store) => store.user);
-  const connections=useSelector((store=>store.connections));
-  const chatUser=connections.filter(connection=>connection._id==targetUserId);
-  console.log(chatUser[0])
+  const connections = useSelector((store) => store.connections);
+  const chatUser = connections.filter(
+    (connection) => connection._id == targetUserId
+  );
   const userId = user?._id;
   const fetchChatMessages = async () => {
-    const chat = await axios.get(BASE_URL+"/chat/" + targetUserId, {
+    const chat = await axios.get(BASE_URL + "/chat/" + targetUserId, {
       withCredentials: true,
     });
-
-    console.log(chat?.data?.messages);
 
     const chatMessages = chat?.data?.messages.map((msg) => {
       const { senderId, text } = msg;
@@ -29,14 +28,13 @@ const Chat = () => {
         text,
       };
     });
-    console.log(chatMessages);
+
     setMessages(chatMessages);
   };
   useEffect(() => {
     fetchChatMessages();
   }, []);
   const messagesEndRef = useRef(null);
-
 
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -53,7 +51,6 @@ const Chat = () => {
     });
 
     socket.on("messageReceived", ({ firstName, lastName, text }) => {
-      console.log(firstName + " :  " + text);
       setMessages((messages) => [...messages, { firstName, lastName, text }]);
     });
 
@@ -71,15 +68,10 @@ const Chat = () => {
       targetUserId,
       text: newMessage,
     });
-    console.log(user?.firstName);
-    console.log(user?.lastName);
-    console.log(userId);
-    console.log(targetUserId);
-    console.log(newMessage);
     setNewMessage("");
   };
   return (
-   <div
+    <div
       className="flex items-center justify-center h-[calc(100vh-3.5rem)] bg-cover bg-center"
       style={{
         backgroundImage:
@@ -87,18 +79,24 @@ const Chat = () => {
       }}
     >
       <div className="relative flex flex-col border border-amber-950 rounded-2xl h-5/6 w-4/5 shadow-2xl shadow-amber-700 bg-transparent ">
-        
-
         <div className="flex m-1">
-        <img className="h-12 w-12 border ml-1 mr-2 rounded-full my-auto" src={chatUser[0]?.photoUrl}/>
-        <h1 className="text-3xl font-bold p-3 text-amber-950">{chatUser[0]?.firstName}</h1>
+          <img
+            className="h-12 w-12 border ml-1 mr-2 rounded-full my-auto"
+            src={chatUser[0]?.photoUrl}
+          />
+          <h1 className="text-3xl font-bold p-3 text-amber-950">
+            {chatUser[0]?.firstName}
+          </h1>
         </div>
 
         <div className="flex-1 overflow-y-auto space-y-3 px-3 pb-24 scrollbar-hidden">
           {messages?.map((msg, index) => {
             const isUser = user?.firstName === msg?.firstName;
             return (
-              <div key={index} className={`flex ${isUser ? "justify-end" : "justify-start"}`}>
+              <div
+                key={index}
+                className={`flex ${isUser ? "justify-end" : "justify-start"}`}
+              >
                 <div
                   className={`max-w-xs px-3 py-2 rounded-2xl shadow-md ${
                     isUser
@@ -114,7 +112,7 @@ const Chat = () => {
               </div>
             );
           })}
-      
+
           <div ref={messagesEndRef} />
         </div>
 
@@ -135,7 +133,6 @@ const Chat = () => {
         </div>
       </div>
     </div>
-
   );
 };
 

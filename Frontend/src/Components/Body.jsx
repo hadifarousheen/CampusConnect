@@ -9,7 +9,7 @@ const Body = () => {
   const dispatch = useDispatch();
   const fetchUser = async () => {
     try {
-      const user = await axios.get(BASE_URL+"/profile/view", {
+      const user = await axios.get(BASE_URL + "/profile/view", {
         withCredentials: true,
       });
       dispatch(addUser(user.data));
@@ -24,7 +24,6 @@ const Body = () => {
     <>
       <NavBar />
       <Outlet />
-   
     </>
   );
 };

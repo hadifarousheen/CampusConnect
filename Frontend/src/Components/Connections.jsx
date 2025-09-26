@@ -10,7 +10,7 @@ const Connections = () => {
   const connections = useSelector((store) => store.connections);
   const fetchConnections = async () => {
     try {
-      const res = await axios.get(BASE_URL+"/user/connections", {
+      const res = await axios.get(BASE_URL + "/user/connections", {
         withCredentials: true,
       });
       dispatch(addConnections(res.data));
@@ -34,8 +34,11 @@ const Connections = () => {
           Friends
         </h1>
         <div className="my-2  ">
-          {connections?.map((connection,index) => (
-            <div key={index} className=" bg-amber-100 flex justify-between my-2 p-1 px-2 py-2 rounded-lg shadow-2xl shadow-amber-950">
+          {connections?.map((connection, index) => (
+            <div
+              key={index}
+              className=" bg-amber-100 flex justify-between my-2 p-1 px-2 py-2 rounded-lg shadow-2xl shadow-amber-950"
+            >
               <div className="flex">
                 <img
                   className="h-12 w-12 border ml-1 mr-2 rounded-full my-auto "
@@ -45,7 +48,10 @@ const Connections = () => {
                   {connection.firstName} {connection.lastName}
                 </h1>
               </div>
-              <Link to={"/body/chat/"+connection._id} className="text-xl  mx-1 px-2 font-bold rounded-lg bg-amber-600 text-white">
+              <Link
+                to={"/body/chat/" + connection._id}
+                className="text-xl  mx-1 px-2 font-bold rounded-lg bg-amber-600 text-white"
+              >
                 Chat
               </Link>
             </div>

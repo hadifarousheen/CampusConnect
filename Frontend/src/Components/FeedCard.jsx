@@ -20,7 +20,7 @@ const FeedCard = ({ user }) => {
   const dispatch = useDispatch();
   const handleClick = async (status, toUserId) => {
     const res = await axios.post(
-      BASE_URL+"/request/send/" + status + "/" + toUserId,
+      BASE_URL + "/request/send/" + status + "/" + toUserId,
       {},
       { withCredentials: true }
     );
