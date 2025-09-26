@@ -127,6 +127,7 @@ const Chat = () => {
           <button
             className="bg-amber-500 hover:bg-amber-600 text-white px-5 py-2 rounded-full font-medium shadow-md transition"
             onClick={sendMessage}
+            
           >
             Send
           </button>

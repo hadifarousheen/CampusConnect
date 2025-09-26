@@ -56,10 +56,10 @@ const Premium = () => {
       {isUserPremium ? (
         <h1>already a Premium User</h1>
       ) : (
-        <div className="flex border  ">
-          <div className="border p-6">
-            <h1 className="font-bold text-3xl">BASIC</h1>
-            <div className="text-2xl py-2">
+        <div className="flex    ">
+          <div className="border border-amber-950 shadow-xl/30 shadow-amber-800 p-6 mx-4 rounded-lg">
+            <h1 className="font-bold text-3xl text-amber-950">BASIC</h1>
+            <div className="text-2xl py-2 text-amber-700">
               <p>Send 50+ Friend request Daily</p>
               <p>Unlimited Chat</p>
               <p>Premium Logo Visibility</p>
@@ -71,9 +71,9 @@ const Premium = () => {
               Buy Now
             </button>
           </div>
-          <div className="border p-6">
-            <h1 className="font-bold text-3xl">ADVANCE</h1>
-            <div className="text-2xl py-2">
+          <div className="border border-amber-950 shadow-xl/30 shadow-amber-800 p-6 mx-4 rounded-lg">
+            <h1 className="font-bold text-3xl text-amber-950">ADVANCE</h1>
+            <div className="text-2xl py-2 text-amber-700">
               <p>Send 100+ Friend request Daily</p>
               <p>Unlimited Chat</p>
               <p>Premium Logo Visibility</p>

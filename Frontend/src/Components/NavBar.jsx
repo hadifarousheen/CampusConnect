@@ -84,33 +84,33 @@ const NavBar = () => {
         </div>
 
         {showMenu && (
-          <div className="flex flex-col order-1  md:hidden text-white absolute z-[1001] border top-12 right-0  my-auto text-lg shadow-xl shadow-amber-600 text-left">
+          <div className="flex flex-col order-1 rounded-xl  md:hidden text-white absolute z-[1001]  top-12 right-0   text-lg shadow-xl shadow-amber-600 text-left bg-transparent">
             <Link
               to="/body/profile"
-              className="w-full my-1 mx-1 bg-amber-500  py-1 px-2 block"
+              className="w-full   bg-amber-500  py-1 px-2 block"
             >
               Profile
             </Link>
             <Link
               to="/body/premium"
-              className="w-full my-1 mx-1 bg-amber-500  py-1 px-2 block"
+              className="w-full   bg-amber-500  py-1 px-2 block"
             >
               Premium
             </Link>
             <Link
               to="/body/connections"
-              className="w-full mx-1 bg-amber-500  py-1 px-2 block my-1"
+              className="w-full  bg-amber-500  py-1 px-2 block "
             >
               Friends
             </Link>
             <Link
               to="/body/requests"
-              className=" mx-1 bg-amber-500  py-1 px-2 block w-full my-1"
+              className="  bg-amber-500  py-1 px-2 block w-full "
             >
               Requests
             </Link>
             <button
-              className="text-left mx-1 bg-amber-500 w-full py-1 px-2 block my-1 "
+              className="text-left  bg-amber-500 w-full py-1 px-2 block  "
               onClick={handleLogout}
             >
               Logout

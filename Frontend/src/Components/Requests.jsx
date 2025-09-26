@@ -55,7 +55,7 @@ const Requests = () => {
                       {request?.fromUserId?.lastName}
                     </h1>
                   </div>
-                  <h2 className="text-lg">{request?.fromUserId?.college}</h2>
+                  <h2 className="text-lg ml-1">{request?.fromUserId?.college}</h2>
                 </div>
                 <div className="my-auto text-white font-bold">
                   <button

@@ -50,7 +50,7 @@ const Connections = () => {
               </div>
               <Link
                 to={"/body/chat/" + connection._id}
-                className="text-xl  mx-1 px-2 font-bold rounded-lg bg-amber-600 text-white"
+                className="text-xl  mx-1 px-2 my-auto shadow-md shadow-amber-400 font-bold rounded-lg bg-amber-600 text-white"
               >
                 Chat
               </Link>
