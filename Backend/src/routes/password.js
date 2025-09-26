@@ -2,8 +2,8 @@ const express = require("express");
 const passwordRouter = express.Router();
 const User = require("../models/user");
 const bcrypt = require("bcrypt");
-const nodemailer = require("nodemailer");
 const validator = require("validator");
+const sendEmail = require("../utils/sendEmail");
 
 passwordRouter.post("/forgetpassword/verifyemail", async (req, res) => {
   const emailId = req.body.emailId;
@@ -15,30 +15,17 @@ passwordRouter.post("/forgetpassword/verifyemail", async (req, res) => {
   const actualOtp = `${Math.floor(Math.random() * 9000)}`.padStart(4, 0);
   user.otp = actualOtp;
   await user.save();
-  let mailTransporter = nodemailer.createTransport({
-    service: "gmail",
-    auth: {
-      user: "21.574hadifa@gmail.com",
-      pass: process.env.AUTH_PASS,
-    },
-  });
+  const sent = await sendEmail(
+    emailId,
+    "OTP to Change Password",
+    `Your OTP is ${actualOtp}`
+  );
 
-  let mailDetails = {
-    from: "21.574hadifa@gmail.com",
-    to: emailId,
-    subject: "OTP to Change Password",
-    text: `Your OTP is ${actualOtp}`,
-  };
+  if (!sent) {
+    return res.status(500).json({ message: "Failed to send email" });
+  }
 
-  mailTransporter.sendMail(mailDetails, function (err, data) {
-    if (err) {
-      console.log("Error Occurs");
-    } else {
-      console.log("Email sent successfully");
-    }
-  });
-
-  res.json({ otp: actualOtp, user: user });
+  res.json({ message: "Email verified" });
 });
 passwordRouter.post("/forgetpassword/verifyotp", async (req, res) => {
   try {
@@ -49,7 +36,7 @@ passwordRouter.post("/forgetpassword/verifyotp", async (req, res) => {
     if (user.otp !== otp.toString()) {
       return res.status(400).json({ message: "Invalid Otp" });
     }
-    res.send(user);
+    res.json({ message: "OTP Verified" });
   } catch (err) {
     res.status(400).json(err);
   }

@@ -27,13 +27,9 @@ const initializeSocket = (server) => {
     socket.on(
       "sendMessage",
       async ({ firstName, lastName, userId, targetUserId, text }) => {
-        // Save messages to the database
-        console.log(firstName,lastName,userId,targetUserId,text)
+        console.log(firstName, lastName, userId, targetUserId, text);
         try {
           const roomId = getSecretRoomId(userId, targetUserId);
-          console.log(firstName + " " + text);
-
-          // TODO: Check if userId & targetUserId are friends
 
           let chat = await Chat.findOne({
             participants: { $all: [userId, targetUserId] },

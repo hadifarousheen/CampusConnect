@@ -1,96 +1,99 @@
-const jwt = require('jsonwebtoken');
-const mongoose=require('mongoose');
-const validator=require('validator')
-const bcrypt=require("bcrypt");
-const { default: isURL } = require('validator/lib/isURL');
-const userSchema=new mongoose.Schema({
-    firstName:{
-        type:String,
-        required:true,
-        trim:true
+const jwt = require("jsonwebtoken");
+const mongoose = require("mongoose");
+const validator = require("validator");
+const bcrypt = require("bcrypt");
+const userSchema = new mongoose.Schema(
+  {
+    firstName: {
+      type: String,
+      required: true,
+      trim: true,
     },
-    lastName:{
-        type:String,
-        reauired:true,
-        trim:true
+    lastName: {
+      type: String,
+      reauired: true,
+      trim: true,
     },
-   emailId: {
-  type: String,
-  unique: true,
-  required: [true, "Email is required"],
-  validate: {
-    validator: function (value) {
-      return validator.isEmail(value); 
-    },
-    message: "Invalid Email"
-  }
-},
-   password:{
-        type:String,
-        required:[true,"Password is required"],
-       
-    },
-    gender:{
-        type:String,
-        validate(value){
-            if(!["Male","Female","Others"].includes(value)){
-              throw new Error("Gender data is not valid")
-            }
+    emailId: {
+      type: String,
+      unique: true,
+      required: [true, "Email is required"],
+      validate: {
+        validator: function (value) {
+          return validator.isEmail(value);
         },
-        required:true
+        message: "Invalid Email",
+      },
     },
-     college:{
-        type:String,
+    password: {
+      type: String,
+      required: [true, "Password is required"],
     },
-    year:{
-        type:Number,
-    },
-    branch:{
-        type:String,
-    },
-    skills:{
-        type:[String],
-    },
-    about:{
-        type:String,
-        maxLength:150
-    },
-    photoUrl:{
-        type:String,
-        default:"https://thefinancemd.com/wp-content/uploads/2015/08/facebook-default-no-profile-pic.jpg"
-    },
-    age:{
-        type:Number
-    },
-        otp:{
-            type:String
-        },
-        isPremium:{
-            type:Boolean,
-            default:false
-        },
-        memberShipType:{
-            type:String
-        },
-        memberShipValidity:{
-            type:Number
+    gender: {
+      type: String,
+      validate(value) {
+        if (!["Male", "Female", "Others"].includes(value)) {
+          throw new Error("Gender data is not valid");
         }
-    
+      },
+      required: true,
+    },
+    college: {
+      type: String,
+    },
+    year: {
+      type: Number,
+    },
+    branch: {
+      type: String,
+    },
+    skills: {
+      type: [String],
+    },
+    about: {
+      type: String,
+      maxLength: 150,
+    },
+    photoUrl: {
+      type: String,
+      default:
+        "https://thefinancemd.com/wp-content/uploads/2015/08/facebook-default-no-profile-pic.jpg",
+    },
+    age: {
+      type: Number,
+    },
+    otp: {
+      type: String,
+    },
+    isPremium: {
+      type: Boolean,
+      default: false,
+    },
+    memberShipType: {
+      type: String,
+    },
+    memberShipValidity: {
+      type: Number,
+    },
+  },
+  { timestamps: true }
+);
 
-},{timestamps:true})
+userSchema.methods.getJWT = async function () {
+  const user = this;
+  const token = await jwt.sign({ _id: user.id }, process.env.TOKEN_SECRET_KEY);
+  return token;
+};
 
-userSchema.methods.getJWT=async function(){
-    const user=this;
-    const token=await jwt.sign({_id:user.id},process.env.TOKEN_SECRET_KEY)
-    return token;
-}
+userSchema.methods.validatePassword = async function (passwordInputByUser) {
+  const user = this;
+  const passwordHash = user.password;
+  const ispasswordValid = await bcrypt.compare(
+    passwordInputByUser,
+    passwordHash
+  );
+  return ispasswordValid;
+};
+const User = mongoose.model("User", userSchema);
 
-userSchema.methods.validatePassword=async function(passwordInputByUser){
-const user=this;
-const passwordHash=user.password;
- const ispasswordValid=await bcrypt.compare(passwordInputByUser,passwordHash);
- return ispasswordValid;
-}
-const User=mongoose.model("User",userSchema);
-
-module.exports=User;
+module.exports = User;
