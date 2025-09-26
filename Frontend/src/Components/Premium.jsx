@@ -1,15 +1,17 @@
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
+import { BASE_URL } from "../utils/constants"
+import axios from "axios"
 
 const Premium=()=>{
     const[isUserPremium,setisUserPremium]=useState(false)
     const verifyPremiumUser=async()=>{
-        const res=await axios.get("http://localhost:3000/premium/verify",{withCredentials:true})
+        const res=await axios.get(BASE_URL+"/premium/verify",{withCredentials:true})
         if(res.data.isPremium){
             setisUserPremium(true)
         }
     }
     const handleBuyClick=async(type)=>{
-        const order=await axios.post("http://localhost:3000/payment/create",{memberShipType:type},{withCredentials:true})
+        const order=await axios.post(BASE_URL+"/payment/create",{memberShipType:type},{withCredentials:true})
           const { amount, keyId, currency, notes, orderId } = order.data;
 
     const options = {

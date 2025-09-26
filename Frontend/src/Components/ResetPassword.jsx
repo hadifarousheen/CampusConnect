@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import { BASE_URL } from "../utils/constants";
 
 const ResetPassword = () => {
   const [emailId, setEmail] = useState("");
@@ -15,7 +16,7 @@ const ResetPassword = () => {
   const verifyEmail = async () => {
     try {
       const res = await axios.post(
-        "http://localhost:3000/forgetpassword/verifyemail",
+        BASE_URL+"/forgetpassword/verifyemail",
         { emailId },
         { withCredentials: true }
       );
@@ -37,7 +38,7 @@ const ResetPassword = () => {
     try {
       setMessage("");
       const res = await axios.post(
-        "http://localhost:3000/forgetpassword/changepassword",
+        BASE_URL+"/forgetpassword/changepassword",
         { password, emailId },
         { withCredentials: true }
       );
@@ -59,7 +60,7 @@ const ResetPassword = () => {
     try {
       setMessage("");
       const res = await axios.post(
-        "http://localhost:3000/forgetpassword/verifyotp",
+        BASE_URL+"/forgetpassword/verifyotp",
         { emailId, otp },
         { withCredentials: true }
       );

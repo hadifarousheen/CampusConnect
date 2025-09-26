@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 import { addUser } from "../utils/userSlice";
 import { Link } from "react-router-dom";
+import { BASE_URL } from "../utils/constants";
 
 const Profile = () => {
   const user=useSelector(store=>store.user)
@@ -22,7 +23,7 @@ const Profile = () => {
 
   const handleSaveProfile=async()=>{
 try{
-  const user=await axios.patch("http://localhost:3000/profile/edit",{firstName,lastName,gender,age,college,year,about,branch,skills,photoUrl},{withCredentials:true});
+  const user=await axios.patch(BASE_URL+"/profile/edit",{firstName,lastName,gender,age,college,year,about,branch,skills,photoUrl},{withCredentials:true});
   console.log(user)
   dispatch(addUser(user.data));
   setShowToast(true)
@@ -36,7 +37,7 @@ try{
 
     const fetchUser=async()=>{
         try{
-             const user=await axios.get("http://localhost:3000/profile/view",{withCredentials:true});
+             const user=await axios.get(BASE_URL+"/profile/view",{withCredentials:true});
              console.log(user?.data)
              dispatch(addUser(user?.data));
               

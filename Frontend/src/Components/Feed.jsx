@@ -3,11 +3,12 @@ import axios from "axios";
 import { addFeed } from "../utils/feedSlice";
 import { useDispatch, useSelector } from "react-redux";
 import FeedCard from "./FeedCard";
+import { BASE_URL } from "../utils/constants";
 const Feed = () => {
   const dispatch = useDispatch();
   const feed = useSelector((store) => store.feed);
   const getFeed = async () => {
-    const res = await axios.get("http://localhost:3000/user/feed", {
+    const res = await axios.get(BASE_URL+"/user/feed", {
       withCredentials: true,
     });
 

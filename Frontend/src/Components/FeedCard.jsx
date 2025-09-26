@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useDispatch } from "react-redux";
 import { removeFromFeed } from "../utils/feedSlice";
+import { BASE_URL } from "../utils/constants";
 
 const FeedCard = ({ user }) => {
   const {
@@ -19,7 +20,7 @@ const FeedCard = ({ user }) => {
   const dispatch = useDispatch();
   const handleClick = async (status, toUserId) => {
     const res = await axios.post(
-      "http://localhost:3000/request/send/" + status + "/" + toUserId,
+      BASE_URL+"/request/send/" + status + "/" + toUserId,
       {},
       { withCredentials: true }
     );

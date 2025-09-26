@@ -3,6 +3,7 @@ import axios from "axios";
 import {useDispatch} from "react-redux"
 import { Link, useNavigate } from "react-router";
 import {addUser} from "../utils/userSlice";
+import { BASE_URL } from "../utils/constants";
 
 const Login = () => {
     const[emailId,setEmail]=useState("tom@gmail.com");
@@ -12,7 +13,7 @@ const Login = () => {
     const navigate=useNavigate();
     const handleLogin=async()=>{
     try{
-        const res=await axios.post("http://localhost:3000/login",{emailId,password},{withCredentials:true});
+        const res=await axios.post(BASE_URL+"/login",{emailId,password},{withCredentials:true});
         setError("")
         dispatch(addUser(res.data));
         navigate("/body");
