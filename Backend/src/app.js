@@ -13,6 +13,7 @@ const cors=require('cors');
 const http=require('http');
 const initializeSocket=require("./utils/socket");
 const chatRouter=require("./routes/chat")
+require("./utils/cronjob")
 
 app.use(cors({
     origin:"http://localhost:5173",
