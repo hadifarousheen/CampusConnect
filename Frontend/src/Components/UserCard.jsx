@@ -26,7 +26,7 @@ const UserCard = () => {
   return (
     <div className=" mt-6    p-2 rounded-lg shadow-2xl shadow-amber-950  bg-amber-100 ">
       <img className="h-60 w-60 mx-auto" src={user?.photoUrl} />
-      <h1 className="text-2xl font-bold px-2 mt-4">
+      <h1 className="text-2xl font-bold px-2 mt-4 text-amber-700">
         {user?.firstName + " " + user?.lastName}
       </h1>
       <div className="my-2 text-xl">
@@ -37,17 +37,17 @@ const UserCard = () => {
         )}
         {user?.college && (
           <p className="px-2">
-            <span className="font-bold">College:</span> {user?.college}
+            <span className="font-bold text-amber-700">College:</span> {user?.college}
           </p>
         )}
         {user?.year && (
           <p className="px-2">
-            <span className="font-bold">Year:</span> {user?.year}{" "}
+            <span className="font-bold text-amber-700">Year:</span> {user?.year}{" "}
           </p>
         )}
         {user?.branch && (
           <p className="px-2">
-            <span className="font-bold">Branch:</span>{" "}
+            <span className="font-bold text-amber-700">Branch:</span>{" "}
             {user?.branch?.toUpperCase()}{" "}
           </p>
         )}

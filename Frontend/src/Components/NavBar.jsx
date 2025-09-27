@@ -33,7 +33,7 @@ const NavBar = () => {
     >
       <div className="flex items-center">
         <Link to="/body/feed">
-          <h1 className="font-bold text-2xl mx-1 opacity-100 text-amber-950 ">
+          <h1 className="font-bold text-2xl mx-1 opacity-100 text-amber-950 hover:scale-105 ">
             CampusConnect
           </h1>
         </Link>
@@ -42,30 +42,30 @@ const NavBar = () => {
         <div className="hidden md:block my-auto text-lg">
           <Link
             to="/body/profile"
-            className=" mx-1 bg-amber-400 rounded-lg py-1 px-2"
+            className=" mx-1 bg-amber-400 rounded-lg py-1 px-2 shadow-xl/30 shadow-amber-700 hover:bg-amber-700 hover:text-white"
           >
             Profile
           </Link>
           <Link
             to="/body/premium"
-            className=" mx-1 bg-amber-400 rounded-lg py-1 px-2"
+            className=" mx-1 bg-amber-400 rounded-lg py-1 px-2 shadow-xl/30 shadow-amber-700 hover:bg-amber-700 hover:text-white"
           >
             Premium
           </Link>
           <Link
             to="/body/connections"
-            className=" mx-1 bg-amber-400 rounded-lg py-1 px-2"
+            className=" mx-1 bg-amber-400 rounded-lg py-1 px-2 shadow-xl/30 shadow-amber-700 hover:bg-amber-700 hover:text-white"
           >
             Friends
           </Link>
           <Link
             to="/body/requests"
-            className=" mx-1 bg-amber-400 rounded-lg py-1 px-2"
+            className=" mx-1 bg-amber-400 rounded-lg py-1 px-2 shadow-xl/30 shadow-amber-700 hover:bg-amber-700 hover:text-white"
           >
             Requests
           </Link>
           <button
-            className="mx-1 bg-amber-400 rounded-lg py-1 px-2"
+            className="mx-1 bg-amber-400 rounded-lg py-0.5 hover:bg-amber-700 hover:text-white px-2 cursor-pointer shadow-xl/30 shadow-amber-700"
             onClick={handleLogout}
           >
             Logout
@@ -88,24 +88,36 @@ const NavBar = () => {
             <Link
               to="/body/profile"
               className="w-full   bg-amber-500  py-1 px-2 block"
+               onClick={() => {
+              setShowMenu(false);
+            }}
             >
               Profile
             </Link>
             <Link
               to="/body/premium"
               className="w-full   bg-amber-500  py-1 px-2 block"
+               onClick={() => {
+              setShowMenu(false);
+            }}
             >
               Premium
             </Link>
             <Link
               to="/body/connections"
               className="w-full  bg-amber-500  py-1 px-2 block "
+               onClick={() => {
+              setShowMenu(false);
+            }}
             >
               Friends
             </Link>
             <Link
               to="/body/requests"
               className="  bg-amber-500  py-1 px-2 block w-full "
+               onClick={() => {
+              setShowMenu(false);
+            }}
             >
               Requests
             </Link>

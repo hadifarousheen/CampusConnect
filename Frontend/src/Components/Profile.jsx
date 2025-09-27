@@ -223,6 +223,7 @@ const Profile = () => {
                 <input
                   id="skills"
                   type="text"
+                  placeholder="Enter skills separated by ,"
                   className="border block mt-2 px-2 py-1 w-full"
                   value={skills}
                   onChange={(e) => {
@@ -257,14 +258,14 @@ const Profile = () => {
                 />
               </div>
               <button
-                className="border w-full my-1 py-2 bg-amber-500 text-white font-bold rounded-lg"
+                className=" w-full my-1 py-2 bg-amber-500  font-bold rounded-lg hover:scale-90"
                 onClick={() => handleSaveProfile()}
               >
                 Save Profile
               </button>
               <Link to="/body/viewProfile">
                 {" "}
-                <button className="border w-full my-1 bg-amber-700 text-white font-bold rounded-lg py-2">
+                <button className=" w-full my-1 bg-amber-700 hover:scale-90 font-bold rounded-lg py-2">
                   View Profile
                 </button>
               </Link>

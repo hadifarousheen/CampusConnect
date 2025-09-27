@@ -29,9 +29,9 @@ const Feed = () => {
       {feed.length > 0 ? (
         <FeedCard user={feed[0]} />
       ) : (
-        <div className="md:relative h-[calc(100vh-3.5rem)] ">
+        <div className=" mx-auto ">
           {" "}
-          <h1 className="text-2xl  font-bold absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2  ">
+          <h1 className="text-2xl  font-bold text-amber-700   ">
             No Users Found{" "}
           </h1>
         </div>

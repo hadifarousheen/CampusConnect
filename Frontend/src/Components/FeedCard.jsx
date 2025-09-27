@@ -60,23 +60,23 @@ const FeedCard = ({ user }) => {
           )}
           <p className="my-2">
             {" "}
-            {skills?.map((skill) => (
-              <span className=" px-2 bg-amber-600 text-white mr-1 py-0.5 rounded-lg">
-                {skill.toUpperCase()}
-              </span>
-            ))}
+            {user?.skills?.map((skill) => (
+            <span className=" px-2 bg-amber-600 text-white mx-1 py-0.5 rounded-lg">
+              {skill.toUpperCase()}
+            </span>
+          ))}
           </p>
         </div>
       </div>
-      <div className="flex gap-1 text-white font-bold py-2">
+      <div className="flex gap-1  font-bold py-2">
         <button
-          className=" bg-amber-500 w-1/2 py-1 rounded-lg hover:scale-90"
+          className=" bg-amber-400 w-1/2 py-1 rounded-lg hover:scale-90"
           onClick={() => handleClick("interested", _id)}
         >
           Interested
         </button>
         <button
-          className="w-1/2 py-1 bg-amber-800 rounded-lg hover:scale-90"
+          className="w-1/2 py-1 bg-amber-700 rounded-lg hover:scale-90"
           onClick={() => handleClick("ignored", _id)}
         >
           Ignore

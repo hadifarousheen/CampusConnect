@@ -104,7 +104,7 @@ const Chat = () => {
                       : "bg-amber-600 text-white rounded-bl-none"
                   }`}
                 >
-                  <div className="text-xs md:text-md font-semibold opacity-70 mb-1">
+                  <div className="text-xs md:text-md font-bold opacity-70 mb-1 text-black">
                     {msg.firstName} {msg.lastName}
                   </div>
                   <div className="text-sm">{msg.text}</div>

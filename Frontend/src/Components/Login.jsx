@@ -70,10 +70,10 @@ const Login = () => {
                 Forgot Password?
               </Link>
             </div>
-            <p className="text-red-600 text-xl">{error}</p>
+            <p className="text-red-600 text-xl font-bold">{error}</p>
             <button
               onClick={handleLogin}
-              className="border w-full my-4 py-2 bg-amber-300  text-black font-bold rounded"
+              className="border w-full my-4 py-2 bg-amber-300  text-black font-bold rounded cursor-pointer hover:scale-90"
             >
               Login
             </button>

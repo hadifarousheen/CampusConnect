@@ -112,12 +112,12 @@ const SignUp = () => {
               />
             </div>
             <p className="text-red-600 text-xl">{error}</p>
-            <Link to="/" className="text-lg">
+            <Link to="/" className="text-lg text-amber-400">
               Already Registered?
             </Link>
             <button
               onClick={handleSignUp}
-              className="border  my-4 py-2 bg-amber-300  rounded w-full text-black font-bold"
+              className="border  my-4 py-2 bg-amber-300  rounded w-full text-black font-bold hover:scale-90 cursor-pointer"
             >
               Sign Up
             </button>

@@ -47,7 +47,7 @@ const Premium = () => {
 
   return (
     <div
-      className="flex items-center justify-center  h-[calc(100vh-3.5rem)] "
+      className="flex md:items-center justify-center  h-[calc(100vh-3.5rem)] "
       style={{
         backgroundImage:
           "url('https://i.pinimg.com/1200x/4e/2e/8d/4e2e8d018198e3a41a4ae9323e07a7dd.jpg')",
@@ -56,8 +56,8 @@ const Premium = () => {
       {isUserPremium ? (
         <h1>already a Premium User</h1>
       ) : (
-        <div className="flex    ">
-          <div className="border border-amber-950 shadow-xl/30 shadow-amber-800 p-6 mx-4 rounded-lg">
+        <div className="md:flex    ">
+          <div className="border border-amber-950 shadow-xl/30 shadow-amber-800 p-6 mx-4 rounded-lg my-4 md:my-0">
             <h1 className="font-bold text-3xl text-amber-950">BASIC</h1>
             <div className="text-2xl py-2 text-amber-700">
               <p>Send 50+ Friend request Daily</p>
@@ -65,7 +65,7 @@ const Premium = () => {
               <p>Premium Logo Visibility</p>
             </div>
             <button
-              className="bg-yellow-400 text-white font-bold py-2 w-full my-2"
+              className="bg-yellow-400 hover:scale-90 font-bold py-2 w-full my-2"
               onClick={() => handleBuyClick("basic")}
             >
               Buy Now
@@ -79,7 +79,7 @@ const Premium = () => {
               <p>Premium Logo Visibility</p>
             </div>
             <button
-              className="bg-amber-700 w-full text-white font-bold py-2 my-2"
+              className="bg-amber-700 w-full hover:scale-90 font-bold py-2 my-2"
               onClick={() => handleBuyClick("advance")}
             >
               Buy Now

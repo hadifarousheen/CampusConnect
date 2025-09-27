@@ -44,13 +44,13 @@ const Connections = () => {
                   className="h-12 w-12 border ml-1 mr-2 rounded-full my-auto "
                   src={connection?.photoUrl}
                 />
-                <h1 className="text-2xl font-bold my-auto">
+                <h1 className="text-2xl font-bold my-auto text-amber-900 ">
                   {connection.firstName} {connection.lastName}
                 </h1>
               </div>
               <Link
                 to={"/body/chat/" + connection._id}
-                className="text-xl  mx-1 px-2 my-auto shadow-md shadow-amber-400 font-bold rounded-lg bg-amber-600 text-white"
+                className="text-xl  mx-1 px-2 my-auto shadow-md shadow-amber-400 font-bold rounded-lg bg-amber-600 hover:text-white hover:bg-amber-400 "
               >
                 Chat
               </Link>

@@ -78,7 +78,7 @@ const ResetPassword = () => {
   return (
     <>
       {showToast && (
-        <div className="w-1/2 md:w-fit bg-amber-300 text-white mx-auto my-2 p-1 px-2 rounded-lg fixed z-50 top-32  left-1/2 -translate-x-1/2 ">
+        <div className="w-1/2 md:w-fit bg-amber-300  mx-auto my-2 p-1 px-2 rounded-lg fixed z-50 top-32 md:top-16 left-1/2 -translate-x-1/2 ">
           <h1 className="text-center">{message}</h1>
         </div>
       )}
@@ -126,20 +126,20 @@ const ResetPassword = () => {
                     </div>
                   </div>
                   <div className="flex justify-between">
-                    <p className="text-red-600 text-xl">{error}</p>
-                    <Link to="/" className="text-lg">
+                    <p className="text-red-600 text-xl font-bold">{error}</p>
+                    <Link to="/" className="text-lg text-amber-400">
                       Login?
                     </Link>
                   </div>
                   <div className="flex gap-0.5">
                     <button
-                      className="border w-full my-4 py-2 bg-amber-300  text-black font-bold rounded disabled"
+                      className="border w-full my-4 py-2 bg-amber-300  text-black font-bold rounded disabled hover:scale-90 cursor-pointer"
                       onClick={() => verifyEmail()}
                     >
                       Get OTP
                     </button>
                     <button
-                      className="border w-full my-4 py-2 bg-amber-300  text-black font-bold rounded"
+                      className="border w-full my-4 py-2 bg-amber-300  text-black font-bold rounded hover:scale-90 cursor-pointer"
                       onClick={() => verifyOTP()}
                     >
                       Verify OTP
@@ -179,13 +179,13 @@ const ResetPassword = () => {
                     />
                   </div>
                   <div className="flex justify-between">
-                    <p className="text-red-600 text-xl">{error}</p>
-                    <Link to="/" className="text-lg">
+                    <p className="text-red-600 text-xl font-bold">{error}</p>
+                    <Link to="/" className="text-lg text-amber-400">
                       Login?
                     </Link>
                   </div>
                   <button
-                    className="border w-full my-4 py-2 bg-amber-300  text-black font-bold rounded"
+                    className="border w-full my-4 py-2 bg-amber-300  text-black font-bold rounded hover:scale-90 cursor-pointer"
                     onClick={() => updatePassword()}
                   >
                     Update Password

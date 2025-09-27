@@ -48,24 +48,24 @@ const Requests = () => {
                   <div className="flex">
                     <img
                       className="h-12 w-12 border ml-1 mr-2 rounded-full my-auto "
-                      src={request?.photoUrl}
+                      src={request?.fromUserId?.photoUrl}
                     />
-                    <h1 className="text-xl font-bold my-auto">
+                    <h1 className="text-xl font-bold my-auto text-amber-700">
                       {request?.fromUserId?.firstName}{" "}
                       {request?.fromUserId?.lastName}
                     </h1>
                   </div>
-                  <h2 className="text-lg ml-1">{request?.fromUserId?.college}</h2>
+                 
                 </div>
-                <div className="my-auto text-white font-bold">
+                <div className="my-auto  font-bold">
                   <button
-                    className="hover:scale-95 mx-1 p-1 px-2 rounded-lg bg-amber-500"
+                    className="hover:scale-95 mx-1 p-1 px-2 rounded-lg bg-amber-400 hover:text-white hover:bg-amber-400"
                     onClick={() => handleRequestReview("accepted", request._id)}
                   >
                     Accept
                   </button>
                   <button
-                    className="hover:scale-95 mx-1 p-1 px-2 rounded-lg bg-amber-800"
+                    className="hover:scale-95 mx-1 p-1 px-2 rounded-lg bg-amber-700 hover:text-white hover:bg-amber-400"
                     onClick={() => handleRequestReview("rejected", request._id)}
                   >
                     Reject
