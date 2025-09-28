@@ -3,7 +3,7 @@ import axios from "axios";
 import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router";
 import { addUser } from "../utils/userSlice";
-
+import { BASE_URL } from "../utils/constants";
 
 const Login = () => {
   const [emailId, setEmail] = useState("tom@gmail.com");
@@ -14,8 +14,7 @@ const Login = () => {
   const handleLogin = async () => {
     try {
       const res = await axios.post(
-        `${import.meta.env.VITE_BASE_URL
-}/login`,
+        BASE_URL + "/login",
         { emailId, password },
         { withCredentials: true }
       );

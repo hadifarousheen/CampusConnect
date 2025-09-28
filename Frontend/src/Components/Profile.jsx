@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 import { addUser } from "../utils/userSlice";
 import { Link } from "react-router-dom";
+import { BASE_URL } from "../utils/constants";
 
 const Profile = () => {
   const user = useSelector((store) => store.user);
@@ -21,8 +22,8 @@ const Profile = () => {
 
   const handleSaveProfile = async () => {
     try {
-      const user = await axios.patch(`${import.meta.env.VITE_BASE_URL
-}/profile/edit`,
+      const user = await axios.patch(
+        BASE_URL + "/profile/edit",
         {
           firstName,
           lastName,
@@ -49,8 +50,7 @@ const Profile = () => {
 
   const fetchUser = async () => {
     try {
-      const user = await axios.get(`${import.meta.env.VITE_BASE_URL
-}/profile/view`, {
+      const user = await axios.get(BASE_URL + "/profile/view", {
         withCredentials: true,
       });
 

@@ -3,7 +3,7 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { addUser } from "../utils/userSlice";
 import { Link, useNavigate } from "react-router-dom";
-
+import { BASE_URL } from "../utils/constants";
 
 const SignUp = () => {
   const [firstName, setFirstName] = useState("");
@@ -17,8 +17,7 @@ const SignUp = () => {
   const handleSignUp = async () => {
     try {
       const res = await axios.post(
-        `${import.meta.env.VITE_BASE_URL
-}/signup`,
+        BASE_URL + "/signup",
         { firstName, lastName, emailId, password, gender },
         { withCredentials: true }
       );
