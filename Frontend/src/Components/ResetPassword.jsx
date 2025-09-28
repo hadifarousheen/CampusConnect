@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { BASE_URL } from "../utils/constants";
+
 
 const ResetPassword = () => {
   const [emailId, setEmail] = useState("");
@@ -16,7 +16,8 @@ const ResetPassword = () => {
   const verifyEmail = async () => {
     try {
       const res = await axios.post(
-        BASE_URL + "/forgetpassword/verifyemail",
+        `${import.meta.env.VITE_BASE_URL
+}/forgetpassword/verifyemail`,
         { emailId },
         { withCredentials: true }
       );
@@ -37,8 +38,8 @@ const ResetPassword = () => {
   const updatePassword = async () => {
     try {
       setMessage("");
-      const res = await axios.post(
-        BASE_URL + "/forgetpassword/changepassword",
+      const res = await axios.post(`${import.meta.env.VITE_BASE_URL
+}/forgetpassword/changepassword`,
         { password, emailId },
         { withCredentials: true }
       );

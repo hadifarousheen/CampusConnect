@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
-import { BASE_URL } from "../utils/constants";
 import axios from "axios";
 
 const Premium = () => {
   const [isUserPremium, setisUserPremium] = useState(false);
   const verifyPremiumUser = async () => {
-    const res = await axios.get(BASE_URL + "/premium/verify", {
+    const res = await axios.get(`${import.meta.env.VITE_BASE_URL
+}/premium/verify`, {
       withCredentials: true,
     });
     if (res.data.isPremium) {
@@ -13,8 +13,8 @@ const Premium = () => {
     }
   };
   const handleBuyClick = async (type) => {
-    const order = await axios.post(
-      BASE_URL + "/payment/create",
+    const order = await axios.post(`${import.meta.env.VITE_BASE_URL
+}/payment/create`,
       { memberShipType: type },
       { withCredentials: true }
     );
