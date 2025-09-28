@@ -9,7 +9,7 @@ const Requests = () => {
   const requests = useSelector((store) => store.requests);
   const fetchRequests = async () => {
     const res = await axios.get(`${import.meta.env.VITE_BASE_URL
-}/user/request/received` {
+}/user/request/received`,{
       withCredentials: true,
     });
 
