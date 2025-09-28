@@ -17,7 +17,7 @@ require("./utils/cronjob")
 
 
 app.use(cors({
-    origin:process.env.FRONTEND_URL,
+    origin:"https://campus-connect-r6qn.vercel.app",
     credentials:true
 }))
 app.use(express.json());
