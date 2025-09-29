@@ -25,7 +25,7 @@ const NavBar = () => {
 
   return (
     <div
-      className="flex justify-between    shadow-2xl shadow-amber-950"
+      className="flex justify-between    shadow-2xl shadow-amber-950 ovrl"
       style={{
         backgroundImage:
           "url('https://i.pinimg.com/1200x/4e/2e/8d/4e2e8d018198e3a41a4ae9323e07a7dd.jpg')",
@@ -84,7 +84,7 @@ const NavBar = () => {
         </div>
 
         {showMenu && (
-          <div className="flex flex-col order-1 rounded-xl  md:hidden text-white absolute z-[1001]  top-12 right-0   text-lg shadow-xl shadow-amber-600 text-left bg-transparent">
+          <div className="flex flex-col order-1 rounded-xl  md:hidden text-white absolute z-[1001]  top-12 right-0   text-lg shadow-xl shadow-amber-600 text-left bg-transparent overflow-hidden">
             <Link
               to="/body/profile"
               className="w-full   bg-amber-500  py-1 px-2 block"
