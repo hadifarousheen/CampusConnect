@@ -17,7 +17,7 @@ require("./utils/cronjob")
 
 
 app.use(cors({
-    origin:"http://13.233.198.197",
+    origin:["http://13.233.198.197","http://localhost:5173"],
     credentials:true
 }))
 app.use(express.json());

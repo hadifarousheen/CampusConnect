@@ -20,14 +20,14 @@ const initializeSocket = (server) => {
   io.on("connection", (socket) => {
     socket.on("joinChat", ({ firstName, userId, targetUserId }) => {
       const roomId = getSecretRoomId(userId, targetUserId);
-      console.log(firstName + " joined Room : " + roomId);
+     
       socket.join(roomId);
     });
 
     socket.on(
       "sendMessage",
       async ({ firstName, lastName, userId, targetUserId, text }) => {
-        console.log(firstName, lastName, userId, targetUserId, text);
+       
         try {
           const roomId = getSecretRoomId(userId, targetUserId);
 
