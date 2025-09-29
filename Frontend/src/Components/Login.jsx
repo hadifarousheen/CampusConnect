@@ -28,14 +28,14 @@ const Login = () => {
 
   return (
     <div
-      className="h-screen w-screen bg-cover bg-center"
+      className="h-screen w-screen bg-cover bg-center overflow-hidden"
       style={{
         backgroundImage:
           "url('https://i.pinimg.com/1200x/85/cf/7b/85cf7b4993b6519887effa15951ca46b.jpg')",
       }}
     >
       <div className="flex items-center justify-center min-h-screen bg-black opacity-70 text-white">
-        <div className="border w-fit p-6 rounded-lg shadow-xl/30 shadow-white">
+        <div className="border w-fit p-3 md:p-6 rounded-lg shadow-xl/30 shadow-white">
           <h1 className="text-3xl font-bold my-4 ">Login</h1>
           <div className="text-2xl">
             <div className="my-2">

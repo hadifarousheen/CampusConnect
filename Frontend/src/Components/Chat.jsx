@@ -2,10 +2,15 @@ import { useEffect, useState, useRef } from "react";
 import { useParams } from "react-router-dom";
 import { createSocketConnection } from "../utils/socket";
 import axios from "axios";
-import { useSelector } from "react-redux";
+import { useSelector,useDispatch } from "react-redux";
 import { BASE_URL } from "../utils/constants";
+import { addUser } from "../utils/userSlice";
+import { addConnections } from "../utils/connectionSlice";
+
 
 const Chat = () => {
+     const dispatch = useDispatch();
+    
   const { targetUserId } = useParams();
   const [newMessage, setNewMessage] = useState("");
   const [messages, setMessages] = useState([]);
@@ -70,6 +75,34 @@ const Chat = () => {
     });
     setNewMessage("");
   };
+ const fetchUser = async () => {
+    try {
+      const user = await axios.get(BASE_URL + "/profile/view", {
+        withCredentials: true,
+      });
+      dispatch(addUser(user.data));
+    } catch (err) {
+      console.log(err.message);
+    }
+  };
+  useEffect(() => {
+    fetchUser();
+  }, []);
+ const fetchConnections = async () => {
+    try {
+      const res = await axios.get(BASE_URL + "/user/connections", {
+        withCredentials: true,
+      });
+      dispatch(addConnections(res.data));
+    } catch (err) {
+      console.log(err.message);
+    }
+  };
+  useEffect(() => {
+    fetchConnections();
+  }, []);
+
+ 
   return (
     <div
       className="flex items-center justify-center h-[calc(100vh-3.5rem)] bg-cover bg-center"
@@ -78,7 +111,7 @@ const Chat = () => {
           "url('https://i.pinimg.com/1200x/4e/2e/8d/4e2e8d018198e3a41a4ae9323e07a7dd.jpg')",
       }}
     >
-      <div className="relative flex flex-col border border-amber-950 rounded-2xl h-5/6 w-4/5 shadow-2xl shadow-amber-700 bg-transparent ">
+      <div className="relative flex flex-col border border-amber-950 rounded-2xl md:h-5/6 w-full h-full md:w-4/5 shadow-2xl shadow-amber-700 bg-transparent ">
         <div className="flex m-1">
           <img
             className="h-12 w-12 border ml-1 mr-2 rounded-full my-auto"
@@ -116,16 +149,16 @@ const Chat = () => {
           <div ref={messagesEndRef} />
         </div>
 
-        <div className="absolute w-full bottom-0 left-0 p-3 bg-transparent backdrop-blur-md rounded-b-2xl flex gap-2 shadow-inner">
+        <div className="absolute w-full bottom-0 left-0 md:p-3 bg-transparent backdrop-blur-md rounded-b-2xl flex md:gap-2 shadow-inner">
           <input
-            className="flex-1 border rounded-full px-4 py-2 outline-none focus:ring-2 focus:ring-amber-400"
+            className=" flex-1 border rounded-full px-2 md:px-4 py-2 outline-none focus:ring-2 focus:ring-amber-400"
             type="text"
             value={newMessage}
             placeholder="Type a message..."
             onChange={(e) => setNewMessage(e.target.value)}
           />
           <button
-            className="bg-amber-500 hover:bg-amber-600 text-white px-5 py-2 rounded-full font-medium shadow-md transition"
+            className="bg-amber-500 hover:bg-amber-600 text-white md:px-5 py-2 rounded-full font-medium shadow-md transition md:w-fit w-1/4 "
             onClick={sendMessage}
             
           >

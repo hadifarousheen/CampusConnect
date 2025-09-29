@@ -83,7 +83,7 @@ const ResetPassword = () => {
         </div>
       )}
       <div
-        className="h-screen w-screen bg-cover bg-center"
+        className="h-screen w-screen bg-cover bg-center overflow-hidden"
         style={{
           backgroundImage:
             "url('https://i.pinimg.com/1200x/85/cf/7b/85cf7b4993b6519887effa15951ca46b.jpg')",

@@ -25,7 +25,7 @@ const NavBar = () => {
 
   return (
     <div
-      className="flex justify-between   p-1 shadow-2xl shadow-amber-950"
+      className="flex justify-between    shadow-2xl shadow-amber-950"
       style={{
         backgroundImage:
           "url('https://i.pinimg.com/1200x/4e/2e/8d/4e2e8d018198e3a41a4ae9323e07a7dd.jpg')",

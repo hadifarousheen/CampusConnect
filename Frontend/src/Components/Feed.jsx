@@ -20,7 +20,7 @@ const Feed = () => {
 
   return (
     <div
-      className="flex items-center  h-[calc(100vh-3.5rem)] "
+      className="flex items-center  h-[calc(100vh-3.5rem)] overflow-hidden "
       style={{
         backgroundImage:
           "url('https://i.pinimg.com/1200x/4e/2e/8d/4e2e8d018198e3a41a4ae9323e07a7dd.jpg')",
@@ -29,7 +29,7 @@ const Feed = () => {
       {feed.length > 0 ? (
         <FeedCard user={feed[0]} />
       ) : (
-        <div className=" mx-auto ">
+        <div className=" mx-auto overflow-hidden ">
           {" "}
           <h1 className="text-2xl  font-bold text-amber-700   ">
             No Users Found{" "}
