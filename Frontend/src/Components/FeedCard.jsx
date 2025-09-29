@@ -58,10 +58,10 @@ const FeedCard = ({ user }) => {
               {branch?.toUpperCase()}
             </p>
           )}
-          <div className="my-2">
+          <div className="my-2 flex flex-wrap">
             {" "}
             {user?.skills?.map((skill) => (
-            <span className=" px-2 bg-amber-600 text-white mx-1 py-0.5 rounded-lg">
+            <span className=" px-2 bg-amber-600 text-white mx-1 py-0.5 rounded-lg my-1">
               {skill.toUpperCase()}
             </span>
           ))}
