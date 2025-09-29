@@ -27,7 +27,7 @@ const FeedCard = ({ user }) => {
     dispatch(removeFromFeed(toUserId));
   };
   return (
-    <div className="border border-amber-300 w-2/3 md:w-1/5 p-4 rounded-lg  shadow-2xl shadow-amber-950 mx-auto relative  z-1 bg-amber-100 ">
+    <div className="border border-amber-300 w-4/5 md:w-1/5 p-4 rounded-lg  shadow-2xl shadow-amber-950 mx-auto relative  z-1 bg-amber-100 ">
       <img className="h-60 w-60 rounded-lg" src={photoUrl} />
       <div className="my-2">
         <h1 className="my-2 font-bold text-2xl">
