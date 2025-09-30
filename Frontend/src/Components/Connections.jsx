@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { addConnections } from "../utils/connectionSlice";
 import { Link } from "react-router-dom";
 import { BASE_URL } from "../utils/constants";
+import { removeConnections } from "../utils/connectionSlice";
 
 const Connections = () => {
   const dispatch = useDispatch();
@@ -21,6 +22,16 @@ const Connections = () => {
   useEffect(() => {
     fetchConnections();
   }, []);
+  const removeConnection=async(userId)=>{
+  try{
+   const res=await axios.post(BASE_URL+"/user/connection/remove/"+userId,{},{withCredentials:true});
+   if(res){
+   dispatch(removeConnections(userId));
+   }
+  }catch(err){
+    console.log(err)
+  }
+  }
   return (
     <div
       className="flex  justify-center h-[calc(100vh-4rem)]   overflow-hidden"
@@ -44,16 +55,26 @@ const Connections = () => {
                   className="h-12 w-12 border ml-1 mr-2 rounded-full my-auto "
                   src={connection?.photoUrl}
                 />
-                <h1 className="text-2xl font-bold my-auto text-amber-900 ">
+                <h1 className="text-md md:text-xl font-bold my-auto text-amber-900 ">
                   {connection.firstName} {connection.lastName}
                 </h1>
               </div>
+              <div className="my-auto">
               <Link
                 to={"/body/chat/" + connection._id}
                 className="text-xl  mx-1 px-2 my-auto shadow-md shadow-amber-400 font-bold rounded-lg bg-amber-600 hover:text-white hover:bg-amber-400 "
               >
                 Chat
               </Link>
+               <button
+                className="text-xl  mx-1 px-2 my-auto shadow-md shadow-amber-400 font-bold rounded-lg bg-amber-600 hover:text-white hover:bg-amber-400 "
+                onClick={()=>{
+                  removeConnection(connection._id)
+                }}
+              >
+               Remove
+              </button>
+              </div>
             </div>
           ))}
         </div>

@@ -60,8 +60,8 @@ const FeedCard = ({ user }) => {
           )}
           <div className="my-2 flex flex-wrap">
             {" "}
-            {user?.skills?.map((skill) => (
-            <span className=" px-2 bg-amber-600 text-white mx-1 py-0.5 rounded-lg my-1">
+            {user?.skills?.map((skill,index) => (
+            <span key={index} className=" px-2 bg-amber-600 text-white mx-1 py-0.5 rounded-lg my-1">
               {skill.toUpperCase()}
             </span>
           ))}
