@@ -54,7 +54,7 @@ const Login = () => {
               <label htmlFor="password">Password</label>
               <input
                 id="password"
-                type="text"
+                type="password"
                 className="border block mt-2 px-2 py-1"
                 value={password}
                 onChange={(e) => {

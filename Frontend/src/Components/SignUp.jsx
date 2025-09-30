@@ -103,7 +103,7 @@ const SignUp = () => {
               <input
                 id="password"
                 required
-                type="text"
+                type="password"
                 className="border block mt-2 px-2 py-1 w-full"
                 value={password}
                 onChange={(e) => {
