@@ -59,15 +59,15 @@ const Connections = () => {
                   {connection.firstName} {connection.lastName}
                 </h1>
               </div>
-              <div className="my-auto">
+              <div className="my-auto flex text-md md:text-xl">
               <Link
                 to={"/body/chat/" + connection._id}
-                className="text-xl  mx-1 px-2 my-auto shadow-md shadow-amber-400 font-bold rounded-lg bg-amber-600 hover:text-white hover:bg-amber-400 "
+                className="  mx-1 px-2 my-auto shadow-md shadow-amber-400 font-bold rounded-lg bg-amber-600 hover:text-white hover:bg-amber-400 "
               >
                 Chat
               </Link>
                <button
-                className="text-xl  mx-1 px-2 my-auto shadow-md shadow-amber-400 font-bold rounded-lg bg-amber-600 hover:text-white hover:bg-amber-400 "
+                className="  mx-1 px-2 my-auto shadow-md shadow-amber-400 font-bold rounded-lg bg-amber-600 hover:text-white hover:bg-amber-400 "
                 onClick={()=>{
                   removeConnection(connection._id)
                 }}
