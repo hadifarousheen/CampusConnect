@@ -84,4 +84,18 @@ userRouter.get("/user/feed", userAuth, async (req, res) => {
   }
 });
 
+userRouter.post("/user/connection/remove/:userId",userAuth,async(req,res)=>{
+  try{
+    const userId=req.params.userId;
+    const {_id}=req.user;
+       const deletedUser = await ConnectionRequest.findOneAndDelete({$or:[{fromUserId:userId,status:"accepted",toUserId:_id},
+        {toUserId:userId,status:"accepted",fromUserId:_id}
+       ]});
+      
+     res.json({message:"Removed from friends"})
+  }catch(err){
+    console.log(err)
+  }
+})
+
 module.exports = userRouter;
