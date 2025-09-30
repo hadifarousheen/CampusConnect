@@ -44,20 +44,20 @@ const Requests = () => {
           {requests?.map((request) => {
             return (
               <div className=" flex justify-between my-2 p-1 px-2 rounded-lg bg-amber-100 shadow-2xl shadow-amber-950 py-2">
-                <div>
+                
                   <div className="flex">
                     <img
                       className="h-12 w-12 border ml-1 mr-2 rounded-full my-auto "
                       src={request?.fromUserId?.photoUrl}
                     />
-                    <h1 className="text-xl font-bold my-auto text-amber-700">
+                    <h1 className="text-md md:text-xl font-bold my-auto text-amber-700">
                       {request?.fromUserId?.firstName}{" "}
                       {request?.fromUserId?.lastName}
                     </h1>
                   </div>
                  
-                </div>
-                <div className="my-auto  font-bold">
+                
+                <div className="my-auto flex font-bold">
                   <button
                     className="hover:scale-95 mx-1 p-1 px-2 rounded-lg bg-amber-400 hover:text-white hover:bg-amber-400"
                     onClick={() => handleRequestReview("accepted", request._id)}
