@@ -11,8 +11,9 @@ const messageSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+   
   },
-  { timeStamps: true }
+  { timestamps: true }
 );
 
 const chatSchema = new mongoose.Schema({
@@ -20,11 +21,12 @@ const chatSchema = new mongoose.Schema({
     {
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",
-      requred: true,
+      required: true,
     },
   ],
-  messages: [messageSchema],
-});
+  messages: [messageSchema]},
+  {timestamps:true}
+);
 
 const Chat = mongoose.model("Chat", chatSchema);
 module.exports = { Chat };

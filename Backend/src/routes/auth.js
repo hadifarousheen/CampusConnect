@@ -3,6 +3,8 @@ const authRouter = express.Router();
 const User = require("../models/user");
 const bcrypt = require("bcrypt");
 const { validateSignUpData } = require("../utils/validation");
+const {userAuth}=require("../middlewares/auth")
+const jwt=require('jsonwebtoken');
 
 authRouter.post("/signup", async (req, res) => {
   const { firstName, lastName, emailId, password, gender } = req.body;
@@ -48,6 +50,8 @@ authRouter.post("/login", async (req, res) => {
     } else {
       const token = await user.getJWT();
       res.cookie("token", token);
+      user.online=true;
+     await user.save();
       res.send(user);
     }
   } catch (err) {
@@ -55,11 +59,34 @@ authRouter.post("/login", async (req, res) => {
   }
 });
 
+
 authRouter.post("/logout", async (req, res) => {
-  res.cookie("token", null, {
-    expires: new Date(Date.now()),
-  });
-  res.send("Logout Successfull");
+  try {
+    const token = req.cookies.token;
+    if (!token) {
+      return res.status(401).json({ message: "Not logged in" });
+    }
+    const decoded = jwt.verify(token, process.env.TOKEN_SECRET_KEY);
+    const user = await User.findById(decoded._id);
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+    user.online = false;
+    await user.save();
+
+    res.cookie("token", "", {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === "production",
+      sameSite: "strict",
+      expires: new Date(0),
+      path: "/",
+    });
+
+    res.json({ message: "Logout successful" });
+  } catch (err) {
+    res.status(500).json({ message: "Logout failed" });
+  }
 });
+
 
 module.exports = authRouter;

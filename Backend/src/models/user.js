@@ -75,6 +75,10 @@ const userSchema = new mongoose.Schema(
     memberShipValidity: {
       type: Number,
     },
+    online:{
+      type:Boolean,
+      default:false
+    }
   },
   { timestamps: true }
 );
