@@ -2,23 +2,23 @@ import { useEffect, useState, useRef } from "react";
 import { useParams } from "react-router-dom";
 import { createSocketConnection } from "../utils/socket";
 import axios from "axios";
-import { useSelector,useDispatch } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { BASE_URL } from "../utils/constants";
 import { addUser } from "../utils/userSlice";
 import { addConnections } from "../utils/connectionSlice";
 
-
 const Chat = () => {
-     const dispatch = useDispatch();
-    
+  const dispatch = useDispatch();
+
   const { targetUserId } = useParams();
   const [newMessage, setNewMessage] = useState("");
   const [messages, setMessages] = useState([]);
   const user = useSelector((store) => store.user);
   const connections = useSelector((store) => store.connections);
-  const chatUser = connections.filter(
+  let chatUser = connections.filter(
     (connection) => connection._id == targetUserId
   );
+
   const userId = user?._id;
   const fetchChatMessages = async () => {
     const chat = await axios.get(BASE_URL + "/chat/" + targetUserId, {
@@ -26,14 +26,14 @@ const Chat = () => {
     });
 
     const chatMessages = chat?.data?.messages.map((msg) => {
-      const { senderId, text } = msg;
+      const { senderId, text, createdAt } = msg;
       return {
         firstName: senderId?.firstName,
         lastName: senderId?.lastName,
         text,
+        createdAt,
       };
     });
-
     setMessages(chatMessages);
   };
   useEffect(() => {
@@ -55,8 +55,11 @@ const Chat = () => {
       targetUserId,
     });
 
-    socket.on("messageReceived", ({ firstName, lastName, text }) => {
-      setMessages((messages) => [...messages, { firstName, lastName, text }]);
+    socket.on("messageReceived", ({ firstName, lastName, text, createdAt }) => {
+      setMessages((messages) => [
+        ...messages,
+        { firstName, lastName, text, createdAt },
+      ]);
     });
 
     return () => {
@@ -75,7 +78,7 @@ const Chat = () => {
     });
     setNewMessage("");
   };
- const fetchUser = async () => {
+  const fetchUser = async () => {
     try {
       const user = await axios.get(BASE_URL + "/profile/view", {
         withCredentials: true,
@@ -88,7 +91,7 @@ const Chat = () => {
   useEffect(() => {
     fetchUser();
   }, []);
- const fetchConnections = async () => {
+  const fetchConnections = async () => {
     try {
       const res = await axios.get(BASE_URL + "/user/connections", {
         withCredentials: true,
@@ -100,9 +103,16 @@ const Chat = () => {
   };
   useEffect(() => {
     fetchConnections();
+    const interval = setInterval(fetchConnections, 1000);
+    return () => clearInterval(interval);
   }, []);
 
- 
+  useEffect(() => {
+    chatUser = connections.filter(
+      (connection) => connection._id == targetUserId
+    );
+  }, [chatUser[0]?.online]);
+
   return (
     <div
       className="flex items-center justify-center h-[calc(100vh-3.5rem)] bg-cover bg-center"
@@ -119,6 +129,14 @@ const Chat = () => {
           />
           <h1 className="text-3xl font-bold p-3 text-amber-950">
             {chatUser[0]?.firstName}
+            <h1 className="block text-sm px-2 ">
+              {" "}
+              {chatUser[0]?.online ? (
+                <span className="text-amber-800">Online</span>
+              ) : (
+                <span className="text-red-600">Offline</span>
+              )}
+            </h1>
           </h1>
         </div>
 
@@ -141,6 +159,12 @@ const Chat = () => {
                     {msg.firstName} {msg.lastName}
                   </div>
                   <div className="text-sm">{msg.text}</div>
+                  <div className="text-xs text-black mt-1 opacity-60">
+                    {new Date(msg.createdAt).toLocaleTimeString([], {
+                      hour: "2-digit",
+                      minute: "2-digit",
+                    })}
+                  </div>
                 </div>
               </div>
             );
@@ -160,7 +184,6 @@ const Chat = () => {
           <button
             className="bg-amber-500 hover:bg-amber-600 text-white md:px-5 py-2 rounded-full font-medium shadow-md transition md:w-fit w-1/4 "
             onClick={sendMessage}
-            
           >
             Send
           </button>
