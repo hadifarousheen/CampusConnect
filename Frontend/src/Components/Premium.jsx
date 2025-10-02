@@ -59,21 +59,21 @@ const Premium = () => {
         <div className="md:flex    ">
           <div className="border border-amber-950 shadow-xl/30 shadow-amber-800 p-6 mx-4 rounded-lg my-4 md:my-0">
             <h1 className="font-bold text-3xl text-amber-950">BASIC</h1>
-            <div className="text-2xl py-2 text-amber-700">
+            <div className="text-2xl py-2 text-amber-700 font-medium">
               <p>Send 50+ Friend request Daily</p>
               <p>Unlimited Chat</p>
               <p>Premium Logo Visibility</p>
             </div>
             <button
-              className="bg-yellow-400 hover:scale-90 font-bold py-2 w-full my-2"
+              className="bg-amber-700 hover:scale-90 font-bold py-2 w-full my-2"
               onClick={() => handleBuyClick("basic")}
             >
-              Buy Now
+              Buy Basic
             </button>
           </div>
           <div className="border border-amber-950 shadow-xl/30 shadow-amber-800 p-6 mx-4 rounded-lg">
             <h1 className="font-bold text-3xl text-amber-950">ADVANCE</h1>
-            <div className="text-2xl py-2 text-amber-700">
+            <div className="text-2xl py-2 text-amber-700 font-medium">
               <p>Send 100+ Friend request Daily</p>
               <p>Unlimited Chat</p>
               <p>Premium Logo Visibility</p>
@@ -82,7 +82,7 @@ const Premium = () => {
               className="bg-amber-700 w-full hover:scale-90 font-bold py-2 my-2"
               onClick={() => handleBuyClick("advance")}
             >
-              Buy Now
+              Buy Advance
             </button>
           </div>
         </div>
