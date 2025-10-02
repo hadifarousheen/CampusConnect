@@ -13,9 +13,9 @@ paymentRouter.post("/payment/create", userAuth, async (req, res) => {
   try {
     const { memberShipType } = req.body;
     const { firstName, lastName, emailId } = req.user;
-    const order = await razorpayInstance.orders.Create({
-      amount: memberShipAmount[memberShipType] * 1000,
-      curreny: "INR",
+    const order = await razorpayInstance.orders.create({
+      amount: memberShipAmount[memberShipType] * 100,
+      currency: "INR",
       receipt: "receipt#1",
       notes: {
         firstName: firstName,
@@ -26,7 +26,7 @@ paymentRouter.post("/payment/create", userAuth, async (req, res) => {
     });
 
     const payment = new Payment({
-      userId: req.user_id,
+      userId: req.user._id,
       orderId: order.id,
       status: order.status,
       amount: order.amount,
@@ -36,13 +36,13 @@ paymentRouter.post("/payment/create", userAuth, async (req, res) => {
     });
 
     const savedPayment = await payment.save();
-    res.json({ ...savedPayment.toJSON() });
+    res.json({ ...savedPayment.toJSON(), keyId: process.env.KEY_ID });
   } catch (err) {
     console.log(err);
   }
 });
 
-paymentRouter.post("/payment/webhook", userAuth, async (req, res) => {
+paymentRouter.post("/payment/webhook", async (req, res) => {
   try {
     const webhookSignature = req.headers("X-Razorpay-Signature");
     const isWebhookValid = validateWebhookSignature(
@@ -51,6 +51,7 @@ paymentRouter.post("/payment/webhook", userAuth, async (req, res) => {
       process.env.WEBHOOK_SECRET
     );
     if (!isWebhookValid) {
+      console.log("webhook is not valid");
       return res.status(400).json({ msg: "webhook signature is invalid" });
     }
     // if(req.body.event==="payment.captured"){}
@@ -60,11 +61,11 @@ paymentRouter.post("/payment/webhook", userAuth, async (req, res) => {
     const payment = await Payment.findOne({ orderId: paymentDetails.order_id });
     payment.status = paymentDetails.status;
     await payment.save();
-   
+
     const user = await User.findOne({ _id: payment.userId });
+    console.log(user);
     user.isPremium = true;
     user.memberShipType = payment.notes.memberShipType;
-   
 
     await user.save();
   } catch (err) {
