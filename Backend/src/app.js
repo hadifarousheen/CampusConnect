@@ -20,7 +20,7 @@ app.use(cors({
     origin:["http://13.233.198.197","http://localhost:5173"],
     credentials:true
 }))
-app.use(express.json());
+app.use(express.json({ limit: "10mb" }));
 app.use(cookieParser());
 
 app.use("/",authRouter);
