@@ -21,13 +21,13 @@ const Profile = () => {
   const dispatch = useDispatch();
 
   const convertToBase64 = (file) => {
-  return new Promise((resolve, reject) => {
-    const reader = new FileReader();
-    reader.readAsDataURL(file); // reads file as Base64 string
-    reader.onload = () => resolve(reader.result);
-    reader.onerror = (error) => reject(error);
-  });
-};
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = () => resolve(reader.result);
+      reader.onerror = (error) => reject(error);
+    });
+  };
 
   const handleSaveProfile = async () => {
     try {
@@ -245,27 +245,17 @@ const Profile = () => {
                   Profile Photo
                 </label>
                 <input
-          id="photo"
-          type="file"
-          accept="image/*"
-          className="border block mt-2 px-2 py-1 w-full"
-        
-          onChange={async (e) => {
-    const file = e.target.files[0];
-    const base64 = await convertToBase64(file);
-    console.log(base64);
-    setPhotoUrl(base64)
-  }} 
-        />
-                {/* <input
                   id="photo"
-                  type="text"
-                  value={photoUrl}
+                  type="file"
+                  accept="image/*"
                   className="border block mt-2 px-2 py-1 w-full"
-                  onChange={(e) => {
-                    setPhotoUrl(e.target.value);
+                  onChange={async (e) => {
+                    const file = e.target.files[0];
+                    const base64 = await convertToBase64(file);
+                    console.log(base64);
+                    setPhotoUrl(base64);
                   }}
-                /> */}
+                />
               </div>
               <button
                 className=" w-full my-1 py-2 bg-amber-500  font-bold rounded-lg hover:scale-90"
