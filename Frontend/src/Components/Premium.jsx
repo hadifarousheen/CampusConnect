@@ -18,12 +18,10 @@ const Premium = () => {
       { memberShipType: type },
       { withCredentials: true }
     );
-    const { amount, keyId, currency, notes, orderId } = order.data;
+    const {  keyId, notes, orderId } = order.data;
 
     const options = {
       key: keyId,
-      amount,
-      currency,
       name: "CampusConnect",
       description: "Connect to other developers",
       order_id: orderId,
@@ -53,9 +51,9 @@ const Premium = () => {
           "url('https://i.pinimg.com/1200x/4e/2e/8d/4e2e8d018198e3a41a4ae9323e07a7dd.jpg')",
       }}
     >
-      {isUserPremium ? (
-        <h1>already a Premium User</h1>
-      ) : (
+     {isUserPremium ? (
+      <h1 className="text-white text-3xl font-bold">Already a Premium User</h1>
+    ) : (
         <div className="md:flex    ">
           <div className="border border-amber-950 shadow-xl/30 shadow-amber-800 p-6 mx-4 rounded-lg my-4 md:my-0">
             <h1 className="font-bold text-3xl text-amber-950">BASIC</h1>
