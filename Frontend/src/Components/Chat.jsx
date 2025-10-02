@@ -9,46 +9,52 @@ import { addConnections } from "../utils/connectionSlice";
 
 const Chat = () => {
   const dispatch = useDispatch();
-
   const { targetUserId } = useParams();
   const [newMessage, setNewMessage] = useState("");
   const [messages, setMessages] = useState([]);
+  const [chatUser, setChatUser] = useState(null); 
+  const socketRef = useRef(null);
+  const messagesEndRef = useRef(null);
+
   const user = useSelector((store) => store.user);
   const connections = useSelector((store) => store.connections);
-  let chatUser = connections.filter(
-    (connection) => connection._id == targetUserId
-  );
-
   const userId = user?._id;
-  const fetchChatMessages = async () => {
-    const chat = await axios.get(BASE_URL + "/chat/" + targetUserId, {
-      withCredentials: true,
-    });
 
-    const chatMessages = chat?.data?.messages.map((msg) => {
-      const { senderId, text, createdAt } = msg;
-      return {
-        firstName: senderId?.firstName,
-        lastName: senderId?.lastName,
-        text,
-        createdAt,
-      };
-    });
-    setMessages(chatMessages);
+
+  const fetchChatMessages = async () => {
+    try {
+      const chat = await axios.get(BASE_URL + "/chat/" + targetUserId, {
+        withCredentials: true,
+      });
+      const chatMessages = chat?.data?.messages.map((msg) => {
+        const { senderId, text, createdAt } = msg;
+        return {
+          firstName: senderId?.firstName,
+          lastName: senderId?.lastName,
+          text,
+          createdAt,
+        };
+      });
+      setMessages(chatMessages);
+    } catch (err) {
+      console.log(err.message);
+    }
   };
+
   useEffect(() => {
     fetchChatMessages();
-  }, []);
-  const messagesEndRef = useRef(null);
+  }, [targetUserId]);
 
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages]);
+
   useEffect(() => {
-    if (!userId) {
-      return;
-    }
+    if (!userId) return;
+
     const socket = createSocketConnection();
+    socketRef.current = socket;
+
     socket.emit("joinChat", {
       firstName: user.firstName,
       userId,
@@ -56,10 +62,7 @@ const Chat = () => {
     });
 
     socket.on("messageReceived", ({ firstName, lastName, text, createdAt }) => {
-      setMessages((messages) => [
-        ...messages,
-        { firstName, lastName, text, createdAt },
-      ]);
+      setMessages((prev) => [...prev, { firstName, lastName, text, createdAt }]);
     });
 
     return () => {
@@ -68,16 +71,21 @@ const Chat = () => {
   }, [userId, targetUserId]);
 
   const sendMessage = () => {
-    const socket = createSocketConnection();
-    socket.emit("sendMessage", {
+    if (!newMessage.trim()) return;
+    if (!socketRef.current) return;
+
+    socketRef.current.emit("sendMessage", {
       firstName: user.firstName,
       lastName: user.lastName,
       userId,
       targetUserId,
       text: newMessage,
     });
+
     setNewMessage("");
   };
+
+  
   const fetchUser = async () => {
     try {
       const user = await axios.get(BASE_URL + "/profile/view", {
@@ -88,9 +96,11 @@ const Chat = () => {
       console.log(err.message);
     }
   };
+
   useEffect(() => {
     fetchUser();
   }, []);
+
   const fetchConnections = async () => {
     try {
       const res = await axios.get(BASE_URL + "/user/connections", {
@@ -101,17 +111,19 @@ const Chat = () => {
       console.log(err.message);
     }
   };
+
   useEffect(() => {
     fetchConnections();
-    const interval = setInterval(fetchConnections, 1000);
+    const interval = setInterval(fetchConnections, 2000);
     return () => clearInterval(interval);
   }, []);
 
   useEffect(() => {
-    chatUser = connections.filter(
+    const selected = connections?.find(
       (connection) => connection._id == targetUserId
     );
-  }, [chatUser[0]?.online]);
+    setChatUser(selected || null);
+  }, [connections, targetUserId]);
 
   return (
     <div
@@ -122,23 +134,25 @@ const Chat = () => {
       }}
     >
       <div className="relative flex flex-col border border-amber-950 rounded-2xl md:h-5/6 w-full h-full md:w-4/5 shadow-2xl shadow-amber-700 bg-transparent ">
-        <div className="flex m-1">
-          <img
-            className="h-12 w-12 border ml-1 mr-2 rounded-full my-auto"
-            src={chatUser[0]?.photoUrl}
-          />
-          <h1 className="text-3xl font-bold p-3 text-amber-950">
-            {chatUser[0]?.firstName}
-            <h1 className="block text-sm px-2 ">
-              {" "}
-              {chatUser[0]?.online ? (
-                <span className="text-amber-800">Online</span>
-              ) : (
-                <span className="text-red-600">Offline</span>
-              )}
+        {chatUser && (
+          <div className="flex m-1">
+            <img
+              className="h-12 w-12 border ml-1 mr-2 rounded-full my-auto"
+              src={chatUser.photoUrl}
+              alt="user"
+            />
+            <h1 className="text-3xl font-bold p-3 text-amber-950">
+              {chatUser.firstName}
+              <span className="block text-sm px-2 ">
+                {chatUser.online ? (
+                  <span className="text-amber-800">Online</span>
+                ) : (
+                  <span className="text-red-600">Offline</span>
+                )}
+              </span>
             </h1>
-          </h1>
-        </div>
+          </div>
+        )}
 
         <div className="flex-1 overflow-y-auto space-y-3 px-3 pb-24 scrollbar-hidden">
           {messages?.map((msg, index) => {
@@ -169,10 +183,8 @@ const Chat = () => {
               </div>
             );
           })}
-
           <div ref={messagesEndRef} />
         </div>
-
         <div className="absolute w-full bottom-0 left-0 md:p-3 bg-transparent backdrop-blur-md rounded-b-2xl flex md:gap-2 shadow-inner">
           <input
             className=" flex-1 border rounded-full px-2 md:px-4 py-2 outline-none focus:ring-2 focus:ring-amber-400"
