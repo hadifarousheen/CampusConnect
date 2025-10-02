@@ -20,6 +20,15 @@ const Profile = () => {
   const [showToast, setShowToast] = useState(false);
   const dispatch = useDispatch();
 
+  const convertToBase64 = (file) => {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.readAsDataURL(file); // reads file as Base64 string
+    reader.onload = () => resolve(reader.result);
+    reader.onerror = (error) => reject(error);
+  });
+};
+
   const handleSaveProfile = async () => {
     try {
       const user = await axios.patch(
@@ -86,7 +95,7 @@ const Profile = () => {
         </div>
       )}
       <div
-        className="text-amber-950 md:relative  md:h-[calc(100vh-3.5rem)]    "
+        className="text-amber-950 md:relative  md:h-[calc(100vh-3rem)]    "
         style={{
           backgroundImage:
             "url('https://i.pinimg.com/1200x/4e/2e/8d/4e2e8d018198e3a41a4ae9323e07a7dd.jpg')",
@@ -235,19 +244,20 @@ const Profile = () => {
                 <label htmlFor="photo" className="font-bold text-xl">
                   Profile Photo
                 </label>
-                {/* <input
+                <input
           id="photo"
           type="file"
           accept="image/*"
           className="border block mt-2 px-2 py-1 w-full"
         
-          onChange={(e) => {
-            console.log(e.target.files[0])
-            setPhotoUrl(e.target.files[0]);
-           
-          }}
-        /> */}
-                <input
+          onChange={async (e) => {
+    const file = e.target.files[0];
+    const base64 = await convertToBase64(file);
+    console.log(base64);
+    setPhotoUrl(base64)
+  }} 
+        />
+                {/* <input
                   id="photo"
                   type="text"
                   value={photoUrl}
@@ -255,7 +265,7 @@ const Profile = () => {
                   onChange={(e) => {
                     setPhotoUrl(e.target.value);
                   }}
-                />
+                /> */}
               </div>
               <button
                 className=" w-full my-1 py-2 bg-amber-500  font-bold rounded-lg hover:scale-90"

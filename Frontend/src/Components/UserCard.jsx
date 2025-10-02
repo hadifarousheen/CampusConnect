@@ -25,7 +25,7 @@ const UserCard = () => {
   useEffect(() => {}, [user]);
   return (
     <div className=" mt-6    p-2 rounded-lg shadow-2xl shadow-amber-950  bg-amber-100 ">
-      <img className="h-60 w-60 mx-auto" src={user?.photoUrl} />
+      <img className="h-60 mx-auto " src={user?.photoUrl} />
       <h1 className="text-2xl font-bold px-2 mt-4 text-amber-700">
         {user?.firstName + " " + user?.lastName}
       </h1>
