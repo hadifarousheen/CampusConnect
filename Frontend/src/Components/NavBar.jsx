@@ -2,7 +2,7 @@ import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { removeUser } from "../utils/userSlice";
 import { Link, useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useRef, useState,useEffect } from "react";
 import { BASE_URL } from "../utils/constants";
 
 const NavBar = () => {
@@ -10,7 +10,8 @@ const NavBar = () => {
   const navigate = useNavigate();
   const [showMenu, setShowMenu] = useState(false);
   const user = useSelector((store) => store.user);
-
+  const menuRef = useRef(null);
+  const buttonRef = useRef(null);
   const handleLogout = async () => {
     try {
       await axios.post(BASE_URL + "/logout",{}, {
@@ -23,6 +24,28 @@ const NavBar = () => {
       console.log(err.message);
     }
   };
+useEffect(() => {
+  const handleClickOutside = (event) => {
+    if (
+      menuRef.current &&
+      !menuRef.current.contains(event.target) &&
+      buttonRef.current &&
+      !buttonRef.current.contains(event.target) 
+    ) {
+      setShowMenu(false);
+    }
+  };
+
+  if (showMenu) {
+    document.addEventListener("click", handleClickOutside);
+  } else {
+    document.removeEventListener("click", handleClickOutside);
+  }
+
+  return () => {
+    document.removeEventListener("click", handleClickOutside);
+  };
+}, [showMenu]);
 
   return (
     <div
@@ -74,7 +97,7 @@ const NavBar = () => {
         </div>
 
         <div className="flex my-auto relative z-50">
-          <img
+          <img  ref={buttonRef}   
             onClick={() => {
               setShowMenu(!showMenu);
             }}
@@ -85,7 +108,7 @@ const NavBar = () => {
         </div>
 
         {showMenu && (
-          <div className="flex flex-col order-1 rounded-xl  md:hidden text-white absolute z-[1001]  top-12 right-0   text-lg shadow-xl shadow-amber-600 text-left bg-transparent overflow-hidden">
+          <div  ref={menuRef} className="flex flex-col order-1 rounded-xl  md:hidden text-white absolute z-[1001]  top-12 right-0   text-lg shadow-xl shadow-amber-600 text-left bg-transparent overflow-hidden">
             <Link
               to="/body/profile"
               className="w-full   bg-amber-500  py-1 px-2 block"
