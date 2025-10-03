@@ -127,7 +127,7 @@ const Chat = () => {
 
   return (
     <div
-      className="flex items-center justify-center h-[calc(100vh-3.5rem)] bg-cover bg-center"
+      className="flex items-center justify-center h-screen bg-cover bg-center"
       style={{
         backgroundImage:
           "url('https://i.pinimg.com/1200x/4e/2e/8d/4e2e8d018198e3a41a4ae9323e07a7dd.jpg')",

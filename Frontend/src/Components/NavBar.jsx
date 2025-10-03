@@ -12,6 +12,7 @@ const NavBar = () => {
   const user = useSelector((store) => store.user);
   const menuRef = useRef(null);
   const buttonRef = useRef(null);
+  const [isUserPremium, setisUserPremium] = useState(false);
   const handleLogout = async () => {
     try {
       await axios.post(BASE_URL + "/logout",{}, {
@@ -47,6 +48,18 @@ useEffect(() => {
   };
 }, [showMenu]);
 
+  const verifyPremiumUser = async () => {
+    const res = await axios.get(BASE_URL + "/premium/verify", {
+      withCredentials: true,
+    });
+    if (res.data.isPremium) {
+      setisUserPremium(true);
+    }
+  };
+   useEffect(() => {
+    verifyPremiumUser();
+  }, []);
+
   return (
     <div
       className="flex justify-between    shadow-2xl shadow-amber-950 ovrl"
@@ -58,7 +71,7 @@ useEffect(() => {
       <div className="flex items-center">
         <Link to="/body/feed">
           <h1 className="font-bold text-2xl mx-1 opacity-100 text-amber-950 hover:scale-105 ">
-            CampusConnect
+            CampusConnect{isUserPremium && "☑"}
           </h1>
         </Link>
       </div>

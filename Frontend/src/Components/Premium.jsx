@@ -52,7 +52,7 @@ const Premium = () => {
       }}
     >
      {isUserPremium ? (
-      <h1 className="text-white text-3xl font-bold">Already a Premium User</h1>
+      <h1 className="text-amber-900 text-3xl font-bold flex items-center">Already a Premium User</h1>
     ) : (
         <div className="md:flex    ">
           <div className="border border-amber-950 shadow-xl/30 shadow-amber-800 p-6 mx-4 rounded-lg my-4 md:my-0">
