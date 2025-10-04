@@ -67,7 +67,7 @@ const Connections = () => {
                 Chat
               </Link>
                <button
-                className="  mx-1 px-2 my-auto shadow-md shadow-amber-400 font-bold rounded-lg bg-amber-600 hover:text-white hover:bg-amber-400 "
+                className="  mx-1 px-2 my-auto shadow-md shadow-amber-400 font-bold rounded-lg bg-amber-600 hover:text-white hover:bg-amber-400 cursor-pointer"
                 onClick={()=>{
                   removeConnection(connection._id)
                 }}

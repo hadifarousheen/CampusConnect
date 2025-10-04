@@ -258,14 +258,14 @@ const Profile = () => {
                 />
               </div>
               <button
-                className=" w-full my-1 py-2 bg-amber-500  font-bold rounded-lg hover:scale-90"
+                className=" w-full my-1 py-2 bg-amber-500  font-bold rounded-lg cursor-pointer hover:scale-90"
                 onClick={() => handleSaveProfile()}
               >
                 Save Profile
               </button>
               <Link to="/body/viewProfile">
                 {" "}
-                <button className=" w-full my-1 bg-amber-700 hover:scale-90 font-bold rounded-lg py-2">
+                <button className=" w-full my-1 bg-amber-700 hover:scale-90 font-bold rounded-lg py-2 cursor-pointer">
                   View Profile
                 </button>
               </Link>

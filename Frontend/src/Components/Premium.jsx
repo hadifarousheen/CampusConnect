@@ -63,7 +63,7 @@ const Premium = () => {
               <p>Premium Logo Visibility</p>
             </div>
             <button
-              className="bg-amber-700 hover:scale-90 font-bold py-2 w-full my-2"
+              className="bg-amber-700 hover:scale-90 font-bold py-2 w-full my-2 cursor-pointer"
               onClick={() => handleBuyClick("basic")}
             >
               Buy Basic
@@ -77,7 +77,7 @@ const Premium = () => {
               <p>Premium Logo Visibility</p>
             </div>
             <button
-              className="bg-amber-700 w-full hover:scale-90 font-bold py-2 my-2"
+              className="bg-amber-700 w-full hover:scale-90 font-bold py-2 my-2 cursor-pointer"
               onClick={() => handleBuyClick("advance")}
             >
               Buy Advance

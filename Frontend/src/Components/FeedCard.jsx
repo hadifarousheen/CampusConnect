@@ -70,13 +70,13 @@ const FeedCard = ({ user }) => {
       </div>
       <div className="flex gap-1  font-bold py-2">
         <button
-          className=" bg-amber-400 w-1/2 py-1 rounded-lg hover:scale-90"
+          className=" bg-amber-400 w-1/2 py-1 rounded-lg hover:scale-90 cursor-pointer"
           onClick={() => handleClick("interested", _id)}
         >
           Interested
         </button>
         <button
-          className="w-1/2 py-1 bg-amber-700 rounded-lg hover:scale-90"
+          className="w-1/2 py-1 bg-amber-700 rounded-lg hover:scale-90 cursor-pointer"
           onClick={() => handleClick("ignored", _id)}
         >
           Ignore

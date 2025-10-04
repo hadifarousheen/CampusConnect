@@ -59,13 +59,13 @@ const Requests = () => {
                 
                 <div className="my-auto flex font-bold">
                   <button
-                    className="hover:scale-95 mx-1 p-1 px-2 rounded-lg bg-amber-400 hover:text-white hover:bg-amber-400"
+                    className="hover:scale-95 mx-1 p-1 px-2 rounded-lg bg-amber-400 hover:text-white hover:bg-amber-400 cursor-pointer"
                     onClick={() => handleRequestReview("accepted", request._id)}
                   >
                     Accept
                   </button>
                   <button
-                    className="hover:scale-95 mx-1 p-1 px-2 rounded-lg bg-amber-700 hover:text-white hover:bg-amber-400"
+                    className="hover:scale-95 mx-1 p-1 px-2 rounded-lg bg-amber-700 hover:text-white hover:bg-amber-400 cursor-pointer"
                     onClick={() => handleRequestReview("rejected", request._id)}
                   >
                     Reject
