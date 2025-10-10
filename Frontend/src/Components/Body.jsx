@@ -14,7 +14,7 @@ const Body = () => {
       });
       dispatch(addUser(user.data));
     } catch (err) {
-      console.log(err.message);
+      
     }
   };
   useEffect(() => {

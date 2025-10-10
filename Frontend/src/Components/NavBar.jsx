@@ -22,7 +22,7 @@ const NavBar = () => {
       dispatch(removeUser());
       return navigate("/");
     } catch (err) {
-      console.log(err.message);
+     
     }
   };
 useEffect(() => {

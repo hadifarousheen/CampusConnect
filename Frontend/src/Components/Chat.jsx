@@ -37,7 +37,7 @@ const Chat = () => {
       });
       setMessages(chatMessages);
     } catch (err) {
-      console.log(err.message);
+   
     }
   };
 
@@ -93,7 +93,7 @@ const Chat = () => {
       });
       dispatch(addUser(user.data));
     } catch (err) {
-      console.log(err.message);
+  
     }
   };
 
@@ -108,7 +108,7 @@ const Chat = () => {
       });
       dispatch(addConnections(res.data));
     } catch (err) {
-      console.log(err.message);
+      
     }
   };
 

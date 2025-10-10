@@ -16,7 +16,7 @@ const Connections = () => {
       });
       dispatch(addConnections(res.data));
     } catch (err) {
-      console.log(err.message);
+  
     }
   };
   useEffect(() => {
@@ -29,7 +29,7 @@ const Connections = () => {
    dispatch(removeConnections(userId));
    }
   }catch(err){
-    console.log(err)
+   
   }
   }
   return (

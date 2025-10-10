@@ -53,7 +53,7 @@ const Profile = () => {
         setShowToast(false);
       }, 3000);
     } catch (err) {
-      console.log(err.message);
+    
     }
   };
 
@@ -65,7 +65,7 @@ const Profile = () => {
 
       dispatch(addUser(user?.data));
     } catch (err) {
-      console.log(err.message);
+ 
     }
   };
   useEffect(() => {
@@ -252,7 +252,6 @@ const Profile = () => {
                   onChange={async (e) => {
                     const file = e.target.files[0];
                     const base64 = await convertToBase64(file);
-                    console.log(base64);
                     setPhotoUrl(base64);
                   }}
                 />
