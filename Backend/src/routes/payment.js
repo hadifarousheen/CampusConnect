@@ -38,7 +38,7 @@ paymentRouter.post("/payment/create", userAuth, async (req, res) => {
     const savedPayment = await payment.save();
     res.json({ ...savedPayment.toJSON(), keyId: process.env.KEY_ID });
   } catch (err) {
-    console.log(err);
+    res.status(401).json({message:err.message})
   }
 });
 
@@ -51,11 +51,8 @@ paymentRouter.post("/payment/webhook", async (req, res) => {
       process.env.WEBHOOK_SECRET
     );
     if (!isWebhookValid) {
-      console.log("webhook is not valid");
       return res.status(400).json({ msg: "webhook signature is invalid" });
     }
-    // if(req.body.event==="payment.captured"){}
-    // if(req.body.event==="payment.failed"){}
     const paymentDetails = req.body.payload.payment.entity;
 
     const payment = await Payment.findOne({ orderId: paymentDetails.order_id });
@@ -70,7 +67,7 @@ paymentRouter.post("/payment/webhook", async (req, res) => {
     }
     res.status(200).json({ success: true });
   } catch (err) {
-    console.log(err);
+    res.status(401).json({message:err.message})
   }
 });
 

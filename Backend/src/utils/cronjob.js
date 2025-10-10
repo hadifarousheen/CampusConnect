@@ -28,10 +28,10 @@ cron.schedule("0 8 * * *", async () => {
           "Login to check your pending Friend Request from yesterday"
         );
       } catch (err) {
-        console.log(err);
+       
       }
     }
   } catch (err) {
-    console.log(err);
+
   }
 });

@@ -94,7 +94,7 @@ userRouter.post("/user/connection/remove/:userId",userAuth,async(req,res)=>{
       
      res.json({message:"Removed from friends"})
   }catch(err){
-    console.log(err)
+   res.status(401).json({message:err.message})
   }
 })
 

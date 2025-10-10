@@ -49,7 +49,7 @@ const initializeSocket = (server) => {
           const lastMessage = chat.messages[chat.messages.length - 1];
           io.to(roomId).emit("messageReceived", { firstName, lastName, text,  createdAt: lastMessage.createdAt  });
         } catch (err) {
-          console.log(err);
+          
         }
       }
     );

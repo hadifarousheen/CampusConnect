@@ -19,10 +19,10 @@ const sendEmail = async (to, subject, text) => {
 
     await mailTransporter.sendMail(mailDetails);
 
-    console.log("Email sent successfully to:", to);
+   
     return true;
   } catch (err) {
-    console.error("Error sending email:", err.message);
+   
     return false;
   }
 };
