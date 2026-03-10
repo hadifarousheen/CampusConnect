@@ -24,7 +24,11 @@ authRouter.post("/signup", async (req, res) => {
     });
     await user.save();
     const token = await user.getJWT();
-    res.cookie("token", token);
+res.cookie("token", token, {
+  httpOnly: true,
+  secure: true,
+  sameSite: "none"
+});
     res.send(user);
   } catch (err) {
     if (err.code === 11000) {
@@ -49,7 +53,11 @@ authRouter.post("/login", async (req, res) => {
       res.status(400).json({ message: "Invalid Credentials" });
     } else {
       const token = await user.getJWT();
-      res.cookie("token", token);
+     res.cookie("token", token, {
+  httpOnly: true,
+  secure: true,
+  sameSite: "none"
+});
       user.online=true;
      await user.save();
       res.send(user);
