@@ -1,3 +1,6 @@
 // export const BASE_URL=location.hostname==="localhost"?"http://localhost:3000":"/api";
-export const BASE_URL=location.hostname==="localhost"?"http://localhost:3000":process.env.REACT_APP_API_URL;
+export const BASE_URL =
+  window.location.hostname === "localhost"
+    ? "http://localhost:3000"
+    : import.meta.env.VITE_API_URL || "https://campusconnect-su2y.onrender.com";
 
