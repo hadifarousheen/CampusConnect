@@ -19,7 +19,8 @@ require("./utils/cronjob")
 app.use(cors({
   origin: [
     "http://localhost:5173",
-    "https://campus-connect-one-eosin.vercel.app"
+    "https://campusconnect.digital",
+    "https://www.campusconnect.digital"
   ],
   credentials: true
 }));
