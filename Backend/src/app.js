@@ -17,9 +17,12 @@ require("./utils/cronjob")
 
 
 app.use(cors({
-    origin:["http://13.233.198.197","http://localhost:5173"],
-    credentials:true
-}))
+  origin: [
+    "http://localhost:5173",
+    "https://campus-connect-one-eosin.vercel.app"
+  ],
+  credentials: true
+}));
 app.use(express.json({ limit: "10mb" }));
 app.use(cookieParser());
 
@@ -30,12 +33,12 @@ app.use("/",userRouter);
 app.use("/",passwordRouter);
 app.use("/",paymentRouter)
 app.use("/",chatRouter)
-
+const PORT = process.env.PORT || 3000;
 const server=http.createServer(app)
 initializeSocket(server)
 connectDB().then(()=>{
     console.log("Database Connected");
-    server.listen(3000,()=>{
+    server.listen(PORT,()=>{
     console.log("Server is listening on port 3000!");
 });
 }).catch(err=>{
